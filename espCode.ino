@@ -1,5 +1,6 @@
-#include "DHT.h"
-#include "FirebaseArduino.h"
+#include <DHT.h>
+#include <FirebaseArduino.h>
+#include <WiFi.h>
 
 // define pin data
 #define DHTPIN    2
@@ -8,11 +9,11 @@
 #define fogPin    5
 #define shadePin  6
 // define firebase data
-#define FIREBASE_HOST "https://ieee-paper.firebaseio.com/");
-#define FIREBASE_AUTH "AIza"
+#define FIREBASE_HOST "https://ieeepaper-default-rtdb.europe-west1.firebasedatabase.app");
+#define FIREBASE_AUTH ""
 // define wfifi data
-#define WIFI_SSID     "IEEE"
-#define WIFI_PASSWORD "IEEE"
+#define WIFI_SSID     "TP-Link_659A"
+#define WIFI_PASSWORD "98781997"
 // define DHT data
 #define DHTTYPE DHT22
 
