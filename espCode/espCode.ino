@@ -9,8 +9,8 @@
 #define fogPin    5
 #define shadePin  6
 // define firebase data
-#define FIREBASE_HOST "https://ieeepaper-default-rtdb.europe-west1.firebasedatabase.app");
-#define FIREBASE_AUTH ""
+#define FIREBASE_HOST ""
+#define FIREBASE_AUTH "AIzaSyAHDUls-v3DKM7q9X70OkXaMzIbNgWqHR4"
 // define wfifi data
 #define WIFI_SSID     "TP-Link_659A"
 #define WIFI_PASSWORD "98781997"
@@ -139,10 +139,10 @@ void loop()
     ================================================================================
     ================================================================================*/
     // Convert the analog value into lux value:
-    int analogValue = analogRead(ldrPin);
-    float voltage = (analogValue / 1024.) * 5;
-    float resistance = 2000 * voltage / (1 - voltage / 5);
-    float lux = pow(RL10 * 1e3 * pow(10, GAMMA) / resistance, (1 / GAMMA));
+    int   analogValue = analogRead(ldrPin);
+    float voltage     = (analogValue / 1024.) * 5;
+    float resistance  = 2000 * voltage / (1 - voltage / 5);
+    float lux         = pow(RL10 * 1e3 * pow(10, GAMMA) / resistance, (1 / GAMMA));
 
     Serial.println(F("Intensity: "));
     Serial.print(lux);
