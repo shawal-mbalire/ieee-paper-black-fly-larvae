@@ -1,32 +1,49 @@
+/*
+Shawal Mbalire
+IEEE Paper Black Soldier Fly BSF
+*/
 #include <DHT.h>
-#include <FirebaseArduino.h>
+#include <Firebase_ESP_Client.h>
 #include <WiFi.h>
+#include "addons/TokenHelper.h"
+#include "addons/RTDBHelper.h"
 
-// define pin data
+#define WIFI_SSID     "TP-Link_659A"
+#define WIFI_PASSWORD "98781997"
+#define DATABASE_URL "https://ieeepaper-default-rtdb.europe-west1.firebasedatabase.app");
+#define API_KEY "AIzaSyAHDUls-v3DKM7q9X70OkXaMzIbNgWqHR4"
+
+#define DHTTYPE   DHT22
 #define DHTPIN    2
 #define ldrPin    3
 #define heaterPin 4
 #define fogPin    5
 #define shadePin  6
-// define firebase data
-#define FIREBASE_HOST ""
-#define FIREBASE_AUTH "AIzaSyAHDUls-v3DKM7q9X70OkXaMzIbNgWqHR4"
-// define wfifi data
-#define WIFI_SSID     "TP-Link_659A"
-#define WIFI_PASSWORD "98781997"
-// define DHT data
-#define DHTTYPE DHT22
 
-// These constants should match the photoresistor's "gamma" and "rl10" attributes
-const float GAMMA  = 0.7;
-const float RL10   =  50;
-
-// initialise objects
 DHT dht(DHTPIN, DHTTYPE);
+FirebaseData fbdo;
+FirebaseAuth auth;
+FirebaseConfig config;
 
-void setup()
-{
-    // put your setup code here, to run once:
+const float   GAMMA              = 0.7;
+const float   RL10               = 50;
+unsigned long sendDataPrevMillis = 0;
+bool          signupOK           = false;
+float         firetemperature    = "";
+float         firehumidity       = "";
+int           firelux            = "";
+String        fireFogPump        = "";
+String        fireShadeMotor     = "";
+String        fireHeater         = "";
+
+
+void setup(){
+    pinMode(ldrPin,     INPUT);
+    pinMode(DHTPIN,     INPUT);
+    pinMode(heaterPin, OUTPUT);
+    pinMode(shadePin,  OUTPUT);
+    pinMode(fogPin,    OUTPUT);
+    dht.begin();
     Serial.begin(115200);
     Serial.println("Hello, Node MCU ESP-32!");
 
@@ -53,36 +70,17 @@ void setup()
     ===========================FireBase=============================================
     ================================================================================
     ================================================================================*/
-    Firebase.begin(FIREBASE_HOST, FIREBASE_AUTH);
-    //initialise firebase sensor data string vars
-    Firebase.setString("humidity",    "0");
-    Firebase.setString("temperature", "0");
-    Firebase.setString("fahrenheit",  "0");
-    Firebase.setString("hic",         "0");
-    Firebase.setString("hif",         "0");
-    Firebase.setString("lux",         "0");
-    //initialise firebase device string vars
-    Firebase.setString("FogPump",    "OFF");
-    Firebase.setString("ShadeMotor", "OFF");
-    Firebase.setString("Heater",     "OFF");
-    //initialise vars
-    String fireFogPump    = "";
-    String fireShadeMotor = "";
-    String fireHeater     = "";
-    String firetemperature    = "";
-    String firehumidity    = "";
-    String firelux    = "";
-
-
-    //begin dht sensor
-    dht.begin();
-
-    // set pin mode
-    pinMode(ldrPin,     INPUT);
-    pinMode(DHTPIN,     INPUT);
-    pinMode(heaterPin, OUTPUT);
-    pinMode(shadePin,  OUTPUT);
-    pinMode(fogPin,    OUTPUT);
+    config.api_key = API_KEY;
+    config.database_url=DATABASE_URL;
+    if {Firebase.signUp(&config,&auth,"","")}{
+      Serial.println("Sign up ok");
+      signupOK = true;
+    }else{
+      Serial.printf("%s\n",config.signer.signupError.message.c_str());
+    }
+    config.token_status_callback = tokenStatusCallback;
+    Firebase.begin(&config,&auth);
+    Firebase.reconnectWiFi(true);
 }
 
 void loop()
@@ -97,20 +95,10 @@ void loop()
     ================================================================================*/
     float humidity    = dht.readHumidity();
     float temperature = dht.readTemperature();
-    float fahrenheit  = dht.readTemperature(true);
-
-    // Check if any reads failed and exit early (to try again).
-    if (isnan(humidity) || isnan(temperature) || isnan(fahrenheit))
-    {
+    if (isnan(humidity) || isnan(temperature) || isnan(fahrenheit)){
         Serial.println(F("Failed to read from DHT sensor!"));
         return;
     }
-
-    // Compute heat index in Fahrenheit (the default)
-    float hif = dht.computeHeatIndex(fahrenheit, humidity);
-    // Compute heat index in Celsius (isFahreheit = false)
-    float hic = dht.computeHeatIndex(temperature, humidity, false);
-
     Serial.print(F("Humidity: "));
     Serial.print(humidity);
     Serial.print(F("%  Temperature: "));
@@ -122,16 +110,6 @@ void loop()
     Serial.print(F("°C "));
     Serial.print(hif);
     Serial.println(F("°F"));
-    //sending data to firebase
-    firetemperature = String(temperature)+String("Celcius");
-    firehumidity    = String(humidity)+String("%");
-    FireBase.pushString("DHT22/Humidity",firehumidity);
-    FireBase.pushString("DHT22/Temperature",firetemperature);
-    if (Firebase.failed()){
-        Serial.print("pushing dht22/logs failed");
-        Serial.println(Firebase.error());
-        return;
-    }
 
     /*==============================================================================
     ================================================================================
@@ -143,25 +121,17 @@ void loop()
     float voltage     = (analogValue / 1024.) * 5;
     float resistance  = 2000 * voltage / (1 - voltage / 5);
     float lux         = pow(RL10 * 1e3 * pow(10, GAMMA) / resistance, (1 / GAMMA));
-
     Serial.println(F("Intensity: "));
     Serial.print(lux);
     Serial.print(F("lux"));
-     //sending data to firebase
-    firelux = String(lux)+String("lux");
-    FireBase.pushString("lightIntensity",firelux);
-    if (Firebase.failed()){
-        Serial.print("pushing lux/logs failed");
-        Serial.println(Firebase.error());
-        return;
-    }
+
 
     /*==============================================================================
     ================================================================================
     ===========================Heater===============================================
     ================================================================================
     ================================================================================*/
-    fireHeater = Firebase.getString("Heater",     "OFF");
+    fireHeater = Firebase.getString("Heater");
     if (fireHeater = "ON"){
         Serial.println("Heater turned on");
         digitalWrite(heaterPin,HIGH);
@@ -190,7 +160,17 @@ void loop()
     ===========================Shade================================================
     ================================================================================
     ================================================================================*/
-    fireShadeMotor = Firebase.getString("ShadeMotor", "OFF");
+    if (Firebase.RTDB.getBool(&fbdo, "shadeMotor/setShadeOff")) {
+        if (fbdo.dataType ()"bool") {
+            shadeValue = fbdo.boolData();
+            Serial.println("Successful READ from " + fbdo.dataPath() + ":" + shadeValue + " (" + fbdo.dataType() + " ");
+            //ledcWrite (PWMChannel, pwmValue);
+            digitalWrite(shadePin, shadeValue);
+        }
+    }else{
+        Serial.println("FAILED: " + fbdo.errorReason ());
+    }
+
     if (fireShadeMotor = "ON"){
         Serial.println("Heater turned on");
         digitalWrite(shadePin,HIGH);
@@ -199,4 +179,39 @@ void loop()
         digitalWrite(shadePin,LOW);
     }else{
         Serial.println("command Error, please send shade ON/OFF")
+
+
+
+
+  if (Firebase.ready() && signupOK && (millis() - sendDataPrevMillis > 15000 || sendDataPrevMillis == 0)){
+    sendDataPrevMillis =` millis();
+    // -----------------STORE sensor data to a RTDB----------------------
+    //-------------pushing lux data to firebase----------------
+    if (Firebase.RTDB.setInt(&fbdo, "BH1750/lux", lux)){
+      Serial.println("LUX SENT");
+      Serial.println("PATH: " + fbdo.dataPath());
+      Serial.println("TYPE: " + fbdo.dataType());
+    }else {
+      Serial.println("FAILED TO SEND LUX");
+      Serial.println("REASON: " + fbdo.errorReason());
+    }
+    //-------------pushing humidity data to firebase----------------
+    if (Firebase.RTDB.setFloat(&fbdo, "DHT22/humidity", humidity)){
+      Serial.println("HUMIDITY SENT");
+      Serial.println("PATH: " + fbdo.dataPath());
+      Serial.println("TYPE: " + fbdo.dataType());
+    }else {
+      Serial.println("FAILED TO SEND HUMIDITY");
+      Serial.println("REASON: " + fbdo.errorReason());
+    }
+    //-------------pushing temperature data to firebase----------------
+    if (Firebase.RTDB.setFloat(&fbdo, "DHT22/temperature(celcius)", temperature)){
+      Serial.println("TEMPERATURE SENT");
+      Serial.println("PATH: " + fbdo.dataPath());
+      Serial.println("TYPE: " + fbdo.dataType());
+    }else {
+      Serial.println("FAILED TO SEND TEMPERATURE");
+      Serial.println("REASON: " + fbdo.errorReason());
+    }
+  }
 }
