@@ -36,6 +36,8 @@ String        fireFogPump        = "";
 String        fireShadeMotor     = "";
 String        fireHeater         = "";
 
+auth.user.email    = "esp32s@bsf.com"
+auth.user.password = "password"
 
 void setup(){
     pinMode(ldrPin,     INPUT);
@@ -81,6 +83,7 @@ void setup(){
     config.token_status_callback = tokenStatusCallback;
     Firebase.begin(&config,&auth);
     Firebase.reconnectWiFi(true);
+    Firebase.RTDB.enableClassicRequest(&fbdo,true);
 }
 
 void loop()
