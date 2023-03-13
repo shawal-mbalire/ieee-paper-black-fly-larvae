@@ -20,11 +20,11 @@ IEEE Paper Black Soldier Fly BSF
 #define USER_PASSWORD "password"
 
 #define DHTTYPE   DHT22
-#define DHTPIN    5
+#define DHTPIN    14
 #define ldrPin    4
-#define heaterPin 3
-#define fogPin    2
-#define shadePin  6
+#define heaterPin 18
+#define fogPin    19
+#define shadePin  2
 //#define bh1750_sda 21
 //#define bh1750_scl 22
 
@@ -61,7 +61,6 @@ void setup(){
 
     Wire.begin();
     dht.begin();
-    timeClient.begin();
     Serial.begin(115200);
     
     timeClient.setTimeOffset(3600*3);
@@ -90,6 +89,9 @@ void setup(){
     Serial.print(WIFI_SSID);
     Serial.print("WiFi network, IP address: ");
     Serial.println(WiFi.localIP());
+
+
+    timeClient.begin();
 
     /*==============================================================================
     ================================================================================
@@ -164,8 +166,8 @@ void loop()
     ================================================================================*/
 
     // Convert the ldr analog value into lux value:
-    int   analogValue = analogRead(ldrPin);
-    float voltage     = (analogValue / 1024.) * 5;
+    float analogValue = analogRead(ldrPin);
+    float voltage     = (analogValue / 1023.) * 5;
     float resistance  = 2000 * voltage / (1 - voltage / 5);
     float lux_ldr     = pow(RL10 * 1e3 * pow(10, GAMMA) / resistance, (1 / GAMMA));
     Serial.println(F("Intensity: "));
@@ -238,7 +240,7 @@ void loop()
     sendDataPrevMillis = millis();
     // -----------------STORE sensor data to a RTDB----------------------
     //-------------pushing ldr lux data to firebase----------------
-    if (Firebase.RTDB.setInt(&fbdo, "LDR/lux", lux_ldr)){
+    if (Firebase.RTDB.setFloat()(&fbdo, "LDR/lux", lux_ldr)){
       Serial.println("LDR LUX SENT");
       Serial.println("PATH: " + fbdo.dataPath());
       Serial.println("TYPE: " + fbdo.dataType());
