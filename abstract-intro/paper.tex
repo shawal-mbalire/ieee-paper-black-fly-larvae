@@ -1,171 +1,217 @@
 \documentclass[conference]{IEEEtran}
 %\IEEEoverridecommandlockouts
 % The preceding line is only needed to identify funding in the first footnote. If that is unneeded, please comment it out.
+\usepackage{hyperref}
+\usepackage[utf8]{inputenc}
 \usepackage{cite}
 \usepackage{amsmath,amssymb,amsfonts}
 \usepackage{algorithmic}
 \usepackage{graphicx}
 \usepackage{textcomp}
 \usepackage{xcolor}
+\usepackage{gensymb}
 \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
-
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=black,      
+    urlcolor=blue,
+    citecolor=black
+    }
 
 \begin{document}
 
-\title{Low cost IOT based cloud solution for Intelligence Integrated Black fly rearing.}
+    \title{Low cost Intelligent Rearing of  Black Soldier Fly(BSF) based on cloud and Internet of Things(IOT).}
 
-\author{
-    \IEEEauthorblockN{1\textsuperscript{st} Bradley Alfred Mpeera Tuwmine}
-    \IEEEauthorblockA{\textit{School of Engineering,CEDAT} \\
+    \author{
+
+        
+        \IEEEauthorblockN{Frank Ssemakula}
+        \IEEEauthorblockA{\textit{School of Engineering,CEDAT} \\
         \textit{Makerere University}\\
         Kampala, Uganda \\
-        bradleytumwine82@gmail.com}
-
-    \and
-    \IEEEauthorblockN{2\textsuperscript{nd} Frank Ssemakula}
-    \IEEEauthorblockA{\textit{School of Engineering,CEDAT} \\
+        \href{mailto:semakulafrank@gmail.com}{semakulafrank@gmail.com}}
+        
+        \and
+        \IEEEauthorblockN{Bradley Alfred Mpeera Tuwmine}
+        \IEEEauthorblockA{\textit{School of Engineering,CEDAT} \\
         \textit{Makerere University}\\
         Kampala, Uganda \\
-        dashdash@gmail.com}
+        \href{mailto:bradleytumwine82@gmail.com}{bradleytumwine82@gmail.com}}
 
-    \and
-    \IEEEauthorblockN{3\textsuperscript{rd} Mary Patience Namugwanya}
-    \IEEEauthorblockA{\textit{School of Engineering,CEDAT} \\
+        \and
+        \IEEEauthorblockN{Mary Patience Namugwanya}
+        \IEEEauthorblockA{\textit{School of Engineering,CEDAT} \\
         \textit{Makerere University}\\
         Kampala, Uganda \\
-        nmarypatience@gmail.com}
+        \href{mailto:nmarypatience@gmail.com}{nmarypatience@gmail.com}}
 
-    \and
-    \IEEEauthorblockN{4\textsuperscript{th} Shawal Mbalire}
-    \IEEEauthorblockA{\textit{School of Engineering,CEDAT} \\
+
+        \and
+        \IEEEauthorblockN{Shawal Mbalire}
+        \IEEEauthorblockA{\textit{School of Engineering,CEDAT} \\
         \textit{Makerere University}\\
         Kampala, Uganda \\
-        mshawal49@icloud.com}\hspace{\linewidth}
+        \href{mailto:mshawal49@icloud.com}{mshawal49@icloud.com}\\
+        \href{shawalmbalire.com}{shawalmbalire.com}}\hspace{\linewidth}
+        
+    }
+    \maketitle
 
+    \begin{abstract}
+     This paper proposes an IoT-based cloud solution for intelligent BSF (Black Soldier Fly) rearing. Internet of Things (IoT) is used for environmental condition monitoring to ensure optimal growing conditions and enable sensor data to be obtained in real-time. The system uses sensors such as temperature,humidity and light intensity. The data collected by the sensors is sent to a Firebase Real Time database. Streamlit python library is used to build a web app that provides an interface between the user and the Firebase Real Time database. The objective of this study is to demonstrate the feasibility of the proposed solution in optimizing BSF rearing and its potential contribution to sustainable food production and waste management practices.
+     
+       %Black soldier fly(BSF), Hermetia illucens is a commonly and widespread fly of the family Stratiomyidae. Since the late 20th century, its larvae stage has increasingly gained attention due to its effective bio-waste conversion \cite{texbook}. Additionally, it has an excellent ability to transform waste into high quality protein. Used as alternative protein additives in animal feed which translates into an inexpensive clean and sustainable food source. Though effective, it requires certain environmental conditions that need to be monitored regularly to make sure the larvae can process the waste effectively. Several challenges remain to ensure that BSF farming is economically viable at different scales and can be widely implemented.Manual labor is required to ensure optimal conditions to rear the larvae, from aerating the feeding substrate to monitoring physical conditions during the growth cycle \cite{lamport94}. But, BSF farmers are not always on site yet the human resource is limited. Thus, an automated system with remote monitoring capability is needed to ease the monitoring process. 
+       
+        %Introduction:
+        % The Black Soldier Fly (BSF) has gained increasing attention in recent years as a sustainable source of protein due to its high nutritional value and efficient conversion of organic waste into protein. However, BSF rearing can be challenging, and monitoring critical parameters such as temperature, humidity, and light intensity is necessary to optimize the process and maximize production yields. In this paper, we present a low-cost IoT-based cloud solution for intelligent BSF rearing designed using ESP32, Firebase, and Streamlit. The objective of this study is to demonstrate the feasibility of the proposed solution in optimizing BSF rearing and its potential contribution to sustainable food production practices.
+        
+        % The prototype capable of monitoring temperature, humidity, and light intensity. The collected data is transmitted to the cloud for analysis and optimization of the rearing process.
+        
+        % The results demonstrate that the proposed IoT-based cloud solution can improve the efficiency and profitability of BSF rearing improving production yields and contributing to the development of sustainable food production practices.
+        
+        % The low-cost IoT-based cloud solution developed in this study offers  real-time monitoring and analysis of critical parameters involved in BSF rearing. This allows farmers and businesses to make informed decisions to maximize production yields and optimize the rearing process. Furthermore, the system's low cost and ease of use make it an attractive option for small-scale farmers and businesses seeking to enter the insect protein industry.
+       
+       \textbf{Keywords - BSF ,Intelligent Rearing, IoT, Cloud}
+    \end{abstract}
 
-}
+    \section{Introduction}
+    
+Bio-waste management is one of the main global challenges of our time, with significant repercussions on human and environmental health related to sanitary issues, pollution of ground water, and emission of greenhouse gases. As global population and consumption rise, bio-waste production is also projected to increase significantly. 
 
-\maketitle
+Conventional methods of dealing with bio-waste, including open dumping in less economically developed countries or landfilling are not equipped with means to capture green house gases such as methane, carbon dioxide and nitrogen dioxide worsen the global warming crisis. Besides, landfills release various odors, attract disease vectors, and produce leachates that pollute ground water \cite{texbook}.
 
-\begin{abstract}
-    This paper aims to increase the production of black fly larvae for farmers to scale up by automating the monotonous and monitoring intesive tasks.
-\end{abstract}
+Black Soldier Fly (BSF), Hermetia illucens, is an insect that has gained popularity among other insect-based bio-waste treatments for its effectiveness to convert bio-waste using its larvae. Bio-waste biomass is consumed by the larvae, which is then transformed into protein and fat of the larvae as well as its residue. The larvae is known to be having a high quality protein suitable for livestock feeding chicken and fish, residue contains nutrients and organic matter that helps reduce soil depletion. Additionally, its effectiveness in reducing the risk of bacterial transmission through bio-waste makes BSF a safe option for bio-waste treatment at the farm.
 
-\begin{IEEEkeywords}
-    black fly soldier fly larvea,iot
-\end{IEEEkeywords}
-\section{Introduction}
+Previously, BSF farming required wide spaces about 150 m$^2$ that made it difficult to rear in locations with limited spaces like urban areas. Moreover, the rearing method needs special care to adjust suitable condition (temperature, light intensity and humidity) and frequent attention from laborers which generally take times in each procedure.  For this reason, there is a need to establish an intelligent BSF rearing system \cite{lamport94}.
 
-Bio-waste management is one of the main global challenges of our time, with significant
-repercussions on human and environmental health related to sanitary issues, pollution of ground
-water, and emission of greenhouse gases (GHGs). As global population and consumption rise, biowaste production is also projected to increase significantly. Conventional methods of dealing with
-bio-waste, including open dumping in less economically developed countries or landfilling not
-equipped with means to capture GHGs such as methane, exacerbate the global warming crisis.
-Besides, landfills release various odors, attract disease vectors, and produce leachates that pollute
-ground water.
+The emergence of Internet of Things (IoT) has helped humans in controlling and monitoring essential conditions. This is possible using devices which capture, evaluate and transmit information from the environment to the cloud, where the data will be stored. Environment monitoring system is one of the most important IoT systems which mainly includes data collections through sensors and data reviewing for short-term measure as well as remote management and observations.
 
-Black soldier fly (BSF), Hermetia illucens, is an insect that has gained popularity among other
-insect-based bio-waste treatments for its effectiveness to convert bio-waste using its larvae. Biowaste biomass is consumed by the larvae, which then will be transformed into protein and fat of
-the larvae as well as its residue. The larvae is known to be having a high quality protein suitable
-for feeding chicken and fish, residue contains nutrients and organic matter that helps reduce soil
-depletion. Additionally, its effectiveness in reducing the risk of bacterial transmission through biowaste makes BSF a safe option for bio-waste treatment in farm level.
-
-Previously, BSF farming required wide spaces about 150 m2
-that made it difficult to rear in
-locations with limited spaces like urban areas. Moreover, the rearing method needs special care to
-adjust suitable condition (temperature and humidity) and frequent attention from laborers which
-generally take times in each procedure. For this reason, there was a need to establish an intelligent
-BSF rearing system.
-
-The Internet of Things (IoT) has begun to emerge as it has helped human in controlling and
-monitoring essential conditions using devices which are able to capture, evaluate and transmit
-information from the environment to the cloud, where the data will be stored. Environment
-monitoring system is one of the most important IoT systems which mainly includes data
-collections through sensors and data reviewing for short-term measure as well as remote
-management and observations.
-
-By using the IoT system to maintain the environmental condition i.e. temperature, relative
-humidity, light intensity and aeration of BSF larvae on its optimum level, data collection from the
-sensors needs to be obtained in real time to make sure that the data is accurate and representing
-the exact information of the environmental condition, as well as to be saved automatically to the
-database for certain period. This is to ensure that the user will have the proper information to
-interpret the insect’s environmental condition. Thus, data communication from the sensor to the
-database plays an important role in obtaining this need.
+IoT systems maintain the environmental conditions i.e. temperature, relative humidity and light intensity of environment at optimum levels for rearing of the BSF larvae. Data collection from the sensors needs to be obtained in real time. This ensures that the data is accurate and represents the exact information of the environmental condition and is saved automatically to the database for a certain period. This is to ensure that the user will have the proper information to interpret the insect’s environmental conditions \cite{b2}. Thus, data communication from the sensor to the database plays an important role in obtaining this need. 
 This paper seeks to develop an automated solution to BSF rearing addressing two needs:
 \begin{enumerate}
-    \item Controlling the environmental conditions, which is currently manual and labor-intensive.
-    \item Remote monitoring of these conditions in real time
+\item Controlling the environmental conditions, which is currently manual and labor-intensive. 
+\item Remote monitoring of these conditions in real time.
 \end{enumerate}
 
-\section{RELATED WORK}
 
-\subsection{Nkozi University.}
-In 2021, Joseph Kasana implemented a World Bank funded BSF project in Nkozi university. The
+
+
+
+\section{background}
+
+\subsection{Nkozi University}
+In 2021, Nkozi Univesity implemented a World Bank funded BSF project. The
 model has the eggs, larvae, pupa and adults in one setup. The setup (enclosure) consists of wooden
-cages covered with wire mesh. These he called the love cages. Each cage has a soaked sponge that
-provides the BSF with water and contributes towards humidity. The base of a love cage is open
-and underneath it is a drum. In this drum, pieces of wood planks are provided in which the adults
+cages covered with wire mesh(love cages).Each cage has a blue plastic container with a soaked sponge that
+provides the BSF with water. The base of a love cage is open
+and underneath it is a drum as shown in Figure 1. In this drum, pieces of wood planks are provided in which the adults
 lay eggs. The interior of the drum is always dark. The eggs are scraped off the planks and placed
 in containers containing feed (wet maize bran). They are thereafter taken to a different building
 called a larvaerium where they stay for four days until they become larvae. The larvae are dried
 and milled into a powder. The pupa are physically brought into the love cage very early in the
 morning (around 4:00 am) when temperatures are still low. This is to prevent any pupa that have
-become adults from becoming active and flying away. The entire setup is covered with a blue
-plastic. Joseph said this plastic is used to control both temperature and light intensity. Additionally,
-it was his belief that the Black Soldier Fly operates best under blue light. Joseph incurred a lot of
-losses with this set up and closed the project in November, 2022.
+become adults from becoming active and flying away. The entire setup is covered with a blue tarpin. This tarpin is used to control both temperature and light intensity. Additionally, the University farmers believed that the Black Soldier Fly operates best under blue light. The University incurred a lot of losses with this set up and closed the project in November, 2022.
+
+% \begin{figure}[h]
+%     \begin{center}
+%         \includegraphics[width=\linewidth]{nkozi exterior.PNG}
+%         \caption{\large System setup}
+%     \end{center}
+% \end{figure}
+
+\begin{figure}[h]
+    \begin{center}
+        \includegraphics[width=\linewidth]{nkozi1.png}
+        \caption{\large Nkozi University System interior}
+    \end{center}
+\end{figure}
 
 \subsection{Marula Proteen Limited}
 Marula Proteen Limited practices BSF rearing on a large scale. They feed urban organic-waste to
-BSF larvae. After a short rearing period these larvae are harvested, dried and processed into high
-quality protein food for livestock production \cite{b1}. The pupa are taken to a greenhouse at another
-location (Namanve). According to the on-site agricultural engineer, the reason for the change in
-location is because there are some pests that are harmful to the eggs but liked by the pupa. The
-pupa are placed in cages in the greenhouse and provided with ideal conditions to encourage
-breeding. The greenhouse is fitted with sensors and a control panel to automatically control
+BSF larvae. After a short rearing period these larvae are harvested, dried and processed into high quality protein food for livestock production. The pupa are taken to a greenhouse at another
+location (Namanve) as shown in Figure 2. According to the on-site agricultural engineer, the reason for the change in
+location is because there are some pests that are harmful to the eggs but liked by the larvae. The
+pupa are placed in cages in the greenhouse where they develop into adults. The adults are provided with ideal conditions to encourage breeding. The greenhouse is fitted with sensors and a control panel to automatically control
 temperature, humidity and light intensity. A fog pump goes on when the humidity is too low, high
-energy lamps turn on when the temperatures are low and a motor controls the opening/closing of
-an aluminium foil to control light intensity. The eggs laid in-between planks in the cages are
+energy lamps turn on when the temperatures are low and a motor (Figure 3) controls the opening/closing of
+a shade to control light intensity. The eggs laid in-between planks in the cages are
 scraped off and taken to an incubator room where they are kept for four days until they develop
 into larvae. The incubator is also fitted with sensors to control temperature, light and aeration.
 
-\section{SOFTWARE AND COMPONENTS}
-\subsection{Node MCU esp 32}
-NodeMCU is an open-source LUA based firmware developed for the ESP8266 wifi chip. By
-exploring functionality with the ESP8266 chip, NodeMCU firmware comes with the ESP8266
-Development board/kit i.e. NodeMCU Development board. Since NodeMCU is an opensource platform, its hardware design is open for edit/modify/build. NodeMCU Dev Kit/board
-consist of ESP8266 wifi enabled chip. The ESP8266 is a low-cost Wi-Fi chip developed by
-Espressif Systems with TCP/IP protocol. Additionally, it contains the crucial elements of a
-computer: CPU, RAM, networking (WiFi), and even a modern operating system and SDK.
-That makes it an excellent choice for Internet of Things (IoT) projects of all kinds. It collects
-and transfers data from the sensors to the cloud based server [1] [2].
-\subsection{BH1750}
-The BH1750 is a calibrated digital light sensor IC that measures the incident light intensity and
-converts it into a 16-bit digital number. The sensor directly gives a digital output. The sensor
-output can be accessed through an I2C interface. It measures ambient light intensity and the
-measurement unit is Lux [3].
-\subsection{DHT22}
-The DHT-22 (also named as AM2302) is a digital-output relative humidity and temperature
-sensor. It uses a capacitive humidity sensor and a thermistor to measure the humidity and
-temperature of the surrounding air, and spits out a digital signal on the data pin [4].
-\subsection{Relay}
-A relay is a programmable electrical switch that can be controlled by a microcontroller. It is
-used to programmatically control the switching on/off of devices which use high voltage and/or
-high current. For this reason a relay can be thought of as a bridge between the microcontroller
-and high voltage devices [5].
-\subsection{Servo motor}
-Servo motors are great devices that can turn to a specified position. Usually, they have a servo
-arm that can turn 180 degrees. Using a microcontroller, we can tell a servo to go to a specified
-position and it will go there. As simple as that! Servo motors were first used in the Remote
-Control (RC) world, usually to control the steering of RC cars or the flaps on a RC plane. With
-time, they found their uses in robotics, automation, and of course, the Arduino world [5]. The
-servo motors will act as actuators when a certain condition is met
+\begin{figure}[h]
+    \begin{center}
+        \includegraphics[width=\linewidth]{greenhouse1.PNG}
+        \caption{\large Greenhouse exterior}
+    \end{center}
+\end{figure}
 
-\subsection{Firebase Realtime Database}
+\begin{figure}[h]
+    \begin{center}
+        \includegraphics[width=\linewidth]{greenhouse2.PNG}
+        \caption{\large Motor in greenhouse}
+    \end{center}
+\end{figure}
+
+\section{proposed system}
+%This paper presents a control and remote monitoring system for BSf rearing. The system  controls  light intensity, humidity and temperature which are environmental conditions that greatly affect the survival and breeding of the Black Soldier Fly. Additionally, the system transmits the data obtained from the sensors and stores it in an online database enabling real time monitoring of the parameters. The sensor data is stored in a Firebase Real Time Database. The project software is programmed and run in Arduino IDE.  
+
+The block diagram of the proposed system is shown in Figure 4. The system uses the NodeMCU ESP32s as the microcontroller. The temperature and humidity readings from a bunch of DHT22 sensors in the room are averaged to two temperature and humidity values which are fed through single bus communication protocol to the microcontroller.The data from the BH1750 is communicated through I2C protocol and the readings appropriately converted to light intensity in lux.
+
+
+\begin{table}[ht]
+\caption{System parameters \cite{proietti2022non}}
+\begin{center}
+\begin{tabular}{|p{0.15\linewidth}|p{0.15\linewidth}|p{0.15\linewidth}|p{0.15\linewidth}|p{0.15\linewidth}|}
+
+\hline
+{\textbf{Parameter}} & {\textbf{Acceptable range}} & {\textbf{Units}} \\
+\hline
+Temperature & 30 - 35 & \degree C \\
+\hline
+Humidity & 65.0 - 75.0 &  RH\% \\
+\hline
+Light Intensity &  550-10000 & Lux \\
+\hline
+
+
+\end{tabular}
+\label{tab1}
+\end{center}
+\end{table}
+The system pseudocode is illustrated in Figure 5. The microcontroller is programmed in micro python to control 3 relays. One relay switches a servo motor that is connected via pulleys and strings to a shade that covers the system thus controlling the light intensity. The other relay runs a fog motor machine that simultaneously increases humidity and decreases temperature. The last relay runs a high energy lamp that increases temperature as well as light intensity.Therefore, the system maintains the parameters in the ranges shown in Table 1.
+
+The microcontroller sends data over a Wi-Fi connection to Firebase real time database and listens for remote commands from a web app interface created using the Streamlit Python library. The systems allows for push buttons to act as interrupts for manual switching. 
+
+\begin{figure}[h]
+    \begin{center}
+        \includegraphics[width=\linewidth]{DIAGRAM.png}
+        \caption{\large  Block diagram}
+    \end{center}
+\end{figure}
+
+% \begin{figure}[h]
+%     \begin{center}
+%         \includegraphics[width=\linewidth]{pushbuttons.png}
+%         \caption{\large Circuit diagram}
+%     \end{center}
+% \end{figure}
+
+The microcontroller sends data to the database and reads instructions from database to switch the shade,lights or fog machine on and off every 5 minutes. The database security only allows input from the firebase web application and is accessed by the ESP32s. The user logs into a web application which shows current temperature, light and humidity values as well as the state (on/off) of the shade,lights and fog machine. Toggle buttons are used to switch state values which update over the database and in turn are sent to the microcontroller in less than 5 minutes.
+\begin{figure}
+    \begin{center}
+        \includegraphics[width=\linewidth]{FLOWCHART.png}
+        \caption{\large Flow chart diagram}
+    \end{center}
+\end{figure}
+
+\section{methodology}
+
+\subsection{Firebase Real Time Database}
 The Firebase Realtime Database is a cloud-hosted database that lets you build rich, collaborative
 applications by allowing secure access to the database directly from client-side code. Data is
-persisted locally, and even while offline, realtime events continue to fire, giving the end user a
+persisted locally, and even while offline, real time events continue to fire, giving the end user a
 responsive experience. When the device regains connection, the Realtime Database synchronizes
 the local data changes with the remote updates that occurred while the client was offline, merging
 any conflicts automatically. It provides a flexible, expression-based rules language, called Firebase
@@ -173,36 +219,157 @@ Realtime Database Security Rules, to define how your data should be structured a
 can be read from or written to. When integrated with Firebase Authentication, developers can
 define who has access to what data, and how they can access it. It is a NoSQL database and as
 such has different optimizations and functionality compared to a relational database. The Realtime
-Database API is designed to only allow operations that can be executed quickly. This enables you
+Database API (Application Programming Interface) is designed to only allow operations that can be executed quickly. This enables you
 to build a great realtime experience that can serve millions of users without compromising on
 responsiveness. Because of this, it is important to think about how users need to access your data
-and then structure it accordingly. Data is stored as JSON and synchronized in realtime to every
+and then structure it accordingly. Data is stored as JSON (Java Script Object Notation) and synchronized in realtime to every
 connected client. When you build cross-platform apps with Apple platforms, Android, and
-JavaScript SDKs, all of clients share one Realtime Database instance and automatically receive
-updates with the newest data [1]
-\section{PROPOSED SYSTEM}
-\section{ENUMERATION}
-Efficient and reliable black soldier fly larvae bio-waste treatment requires a reliable estimate
-on the number of larval offspring dosed per unit of bio-waste and/or larvero (treatment crate),
-which is determined by laborious manual counting of young larvae \cite{e1}. Additionally, there is
-a tendency of BSF farmers to favor larger flies as they have a higher reproduction rate, the
-larvae are bigger and thus contain more protein than smaller larvae. Manual selection of such
-traits at an industrial level is currently infeasible due to the high numbers of larvae making it
-economically unviable \cite{e2}.
-Through the deployment of computer vision techniques together with deep learning methods;
-1. Larvae enumeration can be made more efficient and accurate.
-2. The process can be automated
+JavaScript SDKs, all of the clients share one Realtime Database instance and automatically receive
+updates with the newest data \cite{b3}. 
 
-\section{CONCLUSION}
+\subsection{Streamlit Python library \cite{streamlit}}
+Streamlit is an open-source Python library that makes it easy to create and share beautiful, custom web apps for machine learning and data science. In just a few minutes you can build and deploy powerful data apps. One of the features of the library is the  Streamlit's Community Cloud. It is an open and free platform for the community to deploy, discover, and share Streamlit apps and code with each other.
 
-\section*{Acknowledgment}
+\subsection{Node MCU ESP32s}
+NodeMCU is an open-source LUA based firmware developed for the ESP32s Wi-Fi chip. By
+exploring functionality with the ESP32s chip, NodeMCU firmware comes with the ESP32s
+Development board/kit i.e. NodeMCU Development board. Since NodeMCU is an opensource platform, its hardware design is open for edit/modify/build. NodeMCU Dev Kit/board
+consist of ESP32s Wi-Fi enabled chip. The ESP32s is a low-cost Wi-Fi chip developed by
+Espressif Systems with TCP/IP protocol. Additionally, it contains the crucial elements of a
+computer: CPU, RAM, networking (WiFi), and even a modern operating system and SDK (Software Development Kit).
+That makes it an excellent choice for Internet of Things (IoT) projects of all kinds. It collects
+and transfers data from the sensors to the cloud based server\cite{b4}\cite{b5}.
 
-We thank Phillip the Chief Technical Officer at Proteen for assistance with hardware like
-node MCU ESP32 for prototyping and Joseph Kasana for showing us the project at Nkozi University.
+\subsection{BH1750}
+The BH1750 is a calibrated digital light sensor IC that measures the incident light intensity and
+converts it into a 16-bit digital number. The sensor directly gives a digital output that can be accessed through an I2C interface. It measures ambient light intensity and the
+measurement unit is Lux \cite{b6}.
 
-\begin{thebibliography}{00}
-    \bibitem{b1}  "Proteen," [Online]. Available: https://weareproteen.com/. [Accessed 23 February 2023].
-    \bibitem{e2}  "Towards automatic enumeration of Black Soldier Fly Larvae offspring," [Online]. Available: https://www.eawag.com. [Accessed 23 February 2023].
-    \bibitem{e2}  M.F.Hansen, "Towards Machine Vision for Insect Welfare Monitoring and Behavioural Insights," Frontiers in Veterinary Science, vol. 9, 2022.
+\subsection{DHT22}
+The DHT-22 (also named as AM2302) is a digital-output relative humidity and temperature
+sensor. It uses a capacitive humidity sensor and a thermistor to measure the humidity and
+temperature of the surrounding air, and gives a digital signal on the data pin \cite{b7}.
+
+\subsection{Relays}
+A relay is a programmable electrical switch that can be controlled by a microcontroller. It is
+used to programmatically control the switching on/off of devices which use high voltage and/or
+high current. For this reason a relay can be thought of as a bridge between the microcontroller
+and high voltage devices \cite{b8}.
+
+\subsection{Servo motor}
+Servo motors are great devices that can turn to a specified position. Usually, they have a servo
+arm that can turn 180 degrees. Using a microcontroller, we can tell a servo to go to a specified
+position and it will go there. As simple as that! Servo motors were first used in the Remote
+Control (RC) world, usually to control the steering of RC cars or the flaps on a RC plane. With
+time, they found their uses in robotics, automation, and of course, the Arduino world \cite{b8}. The
+servo motors represent the single phase induction motors used for the fog pump and shade control.
+
+
+
+% \section{Future Work}
+
+% \begin{enumerate}
+%     \item Deploy computer vision techniques together with deep learning methods;
+%     \begin{itemize}
+%         \item To make larvae enumeration more efficient and accurate.
+%         \item To automate the enumeration process.
+%     \end{itemize}
+%     Efficient and reliable black soldier fly larvae bio-waste treatment requires a reliable estimate on the number of larval offspring dosed per unit of bio-waste and/or larvero (treatment crate), which is determined by laborious manual counting of young larvae \cite{b9}. Additionally, there is a tendency of BSF farmers to favor larger flies as they have a higher reproduction rate, the larvae are bigger and thus contain more protein than smaller larvae. Manual selection of such traits at an industrial level is currently infeasible due to the high numbers of larvae making it economically unviable \cite{b0}.
+%     \item Design a more efficient switching circuit system that works for longer switch cycles compared to relays whose contacts melt and weld together for more frequent switching.
+%     \item Add GSM compatibility to remote monitoring using a SIM800L module with 3G capabilities to increase coverage.
+%     \item Create a mobile application for users to interface with the system.   
+% \end{enumerate}
+
+\section{conclusion}
+
+Waste is expected to increase with the increasing population hence waste processing and management is therefore very critical to protect our environment. This is inline with SDG 13.
+
+In this study, an automatic control and remote monitoring system using IoT technologies is proposed.
+The system improves the efficiency of BSF larvae production with a significant reduction in time and labor. Moreover, it uses low-cost digital devices and is easily accessible via a web application.  This is a major step inline with improving efficiency in production lines based on food and environmental conditions.
+
+Therefore, the proposed IoT system enhances larvae production which in turn leads to an advancement in organic waste processing and management. 
+
+%\nocite{*}
+%\bibliographystyle{IEEEtran}
+%\bibliography{references}
+\begin{thebibliography}{99}
+\bibitem{texbook}
+M. C. K. M. M. G. K. K. Kevin Urrutria Avila, "Development and Testing of a Smart BIn toward Automated rearing of Black Soldier Fly Larvae," in IEEE 18th International Conference on Automation Science and Engineering (CASE), Mexico City, 2022. 
+
+\bibitem{lamport94}
+M. O. H. K. H. B. A. D. P. W. T. Sarah Alyaa Tsaabitah, "Data Communication using MQTT for Black Soldier Fly Larvae Monitoring System," in International Conference on Wireless and Telematics (ICWT), Bandung, 2022. 
+
+% \bibitem{b1}
+% N. S. A. T. S. S. T. J. N. C. Suttida Suwannayod, "Semi-automated IoT based Cabinet for Rearing Black Soldier Fly Larvae (BSFL)," in 7th International Conference on Information and Network Technologies (ICINT), Chiang Mai, 2022. 
+
+\bibitem{b2}
+[4] 	M. R. T. K. M. Abdulmjeed Hassan Adam, "Low-Cost Green Power Predictive Farming Using IOT and Cloud Computing," in International Conference on Vision Towards Emerging Trends in Communication and Networking (ViTECoN), Rajahmundry,, 2019. 
+
+\bibitem{b3}
+"Firebase Realtime Database," Firebase, [Online]. Available: https://firebase.google.com/docs/database. [Accessed 24 February 2023].
+
+\bibitem{b4}
+"Introduction to NodeMCU," [Online]. Available: https://www.electronicwings.com/nodemcu/introduction-to-nodemcu. [Accessed 23 February 2023].
+
+\bibitem{b5}
+"NodeMCU ESP32s," [Online]. Available: https://www.make-it.ca/nodemcu-details-specifications. [Accessed 23 February 2023].
+
+\bibitem{b6}
+M. Damirchi, "Interfacing BH1750 Light Intensity Sensor with Arduino," [Online]. Available: https://electropeak.com/learn/interfacing-bh170-light-intensity-sensor-with-arduino. [Accessed 23 February 2023].
+
+\bibitem{b7}
+codebender-cc, "How to Use DHT-22 Sensor- Arduino Tutorial," [Online]. Available: https://www.google.com/amp/s/www.instructables.com/How-to-Use-DHT-22-Sensor-Arduino-Tutorial. [Accessed 23 February 2023].
+
+\bibitem{b8}
+"Arduino Relay,"[Online]. Available: https://arduinogetstarted.com/tutorials/arduino-relay. [Accessed 23 February 2023].
+
+
+\bibitem{b9}
+"Towards automatic enumeration of Black Soldier Fly Larvae offspring," [Online]. Available: https://www.eawag.com. [Accessed 23 February 2023].
+
+\bibitem{b0}
+M. F. Hansen, "Towards Machine Vision for Insect Welfare Monitoring and Behavioural Insights," Frontiers in Veterinary 
+Science, vol. 9, 2022.
+
+\bibitem{proietti2022non}
+M. Proietti, A. Marini, A. Garinei, G. Rossi, F. Bianchi, M. Marconi,
+S. Discepolo, M. Martarelli, M. T. Calcagni, G. Zeni et al., “Non-invasive
+measurements for characterization of hermetia illucens (bsf) life cycle in
+rearing plant,” in 2022 IEEE Workshop on Metrology for Agriculture and
+Forestry (MetroAgriFor). IEEE, 2022, pp. 223–228
+
+\bibitem{tsaabitah2022data} S. A. Tsaabitah, M. O. Hasanuddin, K. H. Burhan, A. D. Permana, and
+W. Trusaji, “Data communication using mqtt for black soldier fly larvae
+monitoring system,” in 2022 8th International Conference on Wireless
+and Telematics (ICWT). IEEE, 2022, pp. 1–5.
+
+\bibitem{uddin2022iot} M. A. Uddin, U. K. Dey, S. A. Tonima, and T. I. Tusher, “An iot-based
+cloud solution for intelligent integrated rice-fish farming using wireless
+sensor networks and sensing meteorological parameters,” in 2022 IEEE
+12th Annual Computing and Communication Workshop and Conference
+(CCWC). IEEE, 2022, pp. 0568–0573.
+
+\bibitem{rabell2021review} V. C. Rabell, C. Gutierrez-Antonio, J. F. G. Trejo, and A. A. Feregrino-Perez, “A review on processes for whey and dairy wastewater treatment and valorization,” in 2021 XVII International Engineering Congress
+(CONIIN). IEEE, 2021, pp. 1–6.
+
+\bibitem{b1} S. Suwannayod, S. S. Ramasamy, N. Suyaroj, A. Tananchana, S. Siriphen,
+T. Jenrungrod, and N. Chakpitak, “Semi-automated iot based cabinet
+for rearing black soldier fly larvae (bsfl),” in 2022 7th International
+Conference on Information and Network Technologies (ICINT). IEEE,
+2022, pp. 80–84.
+
+\bibitem{sabir2020electrically} M. O. Sabir, P. Verma, P. Maduri, and K. Kushagra, “Electrically
+controlled artificial system for organic waste management using black
+soldier flies with iot monitoring,” in 2020 2nd International Conference
+on Advances in Computing, Communication Control and Networking
+(ICACCCN). IEEE, 2020, pp. 871–875.
+
+\bibitem{avila2022development} K. U. Avila, M. Campbell, K. Mauck, M. Gebiola, and K. Karydis,
+“Development and testing of a smart bin toward automated rearing of
+black soldier fly larvae,” in 2022 IEEE 18th International Conference on
+Automation Science and Engineering (CASE). IEEE, 2022, pp. 1238–
+1243.
+\bibitem{streamlit}{"Official Streamlit Website" Available: https://streamlit.io/}[Accessed 27 February 2023
+
 \end{thebibliography}
 \end{document}
