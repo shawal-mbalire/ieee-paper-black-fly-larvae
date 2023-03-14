@@ -12,14 +12,15 @@ IEEE Paper Black Soldier Fly BSF
 #include "addons/TokenHelper.h"
 #include "addons/RTDBHelper.h"
 
-#define WIFI_SSID     "TP-Link_659A"
-#define WIFI_PASSWORD "98781997"
+#define WIFI_SSID     "Shawal_iOS"//"TP-Link_659A"
+#define WIFI_PASSWORD "12121217"//"98781997"
 #define DATABASE_URL  "https://ieeepaper-default-rtdb.europe-west1.firebasedatabase.app"
 #define API_KEY       "AIzaSyAHDUls-v3DKM7q9X70OkXaMzIbNgWqHR4"
 #define USER_EMAIL    "esp32s@bsf.com"
 #define USER_PASSWORD "password"
 
 #define DHTTYPE   DHT22
+
 #define DHTPIN    14
 #define ldrPin    4
 #define heaterPin 18
@@ -47,6 +48,7 @@ bool          setFog;
 bool          setShade;
 bool          setBulb;
 float         lux;
+float         lux_ldr;
 int           splitT;
 String        formattedDate;
 String        dayStamp;
@@ -59,12 +61,11 @@ void setup(){
     pinMode(shadePin,  OUTPUT);
     pinMode(fogPin,    OUTPUT);
 
-    Wire.begin();
     dht.begin();
+    Wire.begin();
     Serial.begin(115200);
-    
-    timeClient.setTimeOffset(3600*3);
     Serial.println("Hello, Node MCU ESP-32!");
+    
     //===========================BH1750====================
     if (lightMeter.begin(BH1750::CONTINUOUS_HIGH_RES_MODE)) {
       Serial.println(F("BH1750 Advanced begin"));
@@ -91,6 +92,7 @@ void setup(){
     Serial.println(WiFi.localIP());
 
 
+    timeClient.setTimeOffset(3600*3);
     timeClient.begin();
 
     /*==============================================================================
@@ -169,7 +171,7 @@ void loop()
     float analogValue = analogRead(ldrPin);
     float voltage     = (analogValue / 1023.) * 5;
     float resistance  = 2000 * voltage / (1 - voltage / 5);
-    float lux_ldr     = pow(RL10 * 1e3 * pow(10, GAMMA) / resistance, (1 / GAMMA));
+    lux_ldr     = pow(RL10 * 1e3 * pow(10, GAMMA) / resistance, (1 / GAMMA));
     Serial.println(F("Intensity: "));
     Serial.print(lux_ldr);
     Serial.print(F("lux"));
@@ -185,6 +187,7 @@ void loop()
      
     luxjson.add("day",dayStamp);
     luxjson.add("time",timeStamp);
+    luxjson.add("lux_ldr",lux_ldr);
     luxjson.add("lux",lux);
 
     /*==============================================================================
@@ -239,8 +242,9 @@ void loop()
   if (Firebase.ready() && signupOK && (millis() - sendDataPrevMillis > 15000 || sendDataPrevMillis == 0)){
     sendDataPrevMillis = millis();
     // -----------------STORE sensor data to a RTDB----------------------
-    //-------------pushing ldr lux data to firebase----------------
-    if (Firebase.RTDB.setFloat()(&fbdo, "LDR/lux", lux_ldr)){
+
+    //-------------setting ldr lux data to firebase----------------
+    if (Firebase.RTDB.setFloat(&fbdo, "LDR/lux", lux_ldr)){
       Serial.println("LDR LUX SENT");
       Serial.println("PATH: " + fbdo.dataPath());
       Serial.println("TYPE: " + fbdo.dataType());
@@ -248,8 +252,9 @@ void loop()
       Serial.println("FAILED TO SEND LDR LUX");
       Serial.println("REASON: " + fbdo.errorReason());
     }
-    //-------------pushing lux data to firebase----------------
-    if (Firebase.RTDB.setInt(&fbdo, "BH1750/lux", lux)){
+
+    //-------------setting lux data to firebase----------------
+    if (Firebase.RTDB.setFloat(&fbdo, "BH1750/lux", lux)){
       Serial.println("BH1750 LUX SENT");
       Serial.println("PATH: " + fbdo.dataPath());
       Serial.println("TYPE: " + fbdo.dataType());
@@ -257,7 +262,8 @@ void loop()
       Serial.println("FAILED TO SEND BH1750 LUX");
       Serial.println("REASON: " + fbdo.errorReason());
     }
-    //-------------pushing humidity data to firebase----------------
+
+    //-------------setting humidity data to firebase----------------
     if (Firebase.RTDB.setFloat(&fbdo, "DHT/humidity", humidity)){
       Serial.println("HUMIDITY SENT");
       Serial.println("PATH: " + fbdo.dataPath());
@@ -266,7 +272,8 @@ void loop()
       Serial.println("FAILED TO SEND HUMIDITY");
       Serial.println("REASON: " + fbdo.errorReason());
     }
-    //-------------pushing temperature data to firebase----------------
+
+    //-------------setting temperature data to firebase----------------
     if (Firebase.RTDB.setFloat(&fbdo, "DHT/temperature(celcius)", temperature)){
       Serial.println("TEMPERATURE SENT");
       Serial.println("PATH: " + fbdo.dataPath());
@@ -275,7 +282,8 @@ void loop()
       Serial.println("FAILED TO SEND TEMPERATURE");
       Serial.println("REASON: " + fbdo.errorReason());
     }
-    //-------------pushing shade ison data to firebase----------------
+
+    //-------------setting shade ison data to firebase----------------
     if (Firebase.RTDB.setBool(&fbdo, "shadeMotor/isOn", digitalRead(shadePin))){
       Serial.println("shadeMotor SENT");
       Serial.println("PATH: " + fbdo.dataPath());
@@ -284,7 +292,8 @@ void loop()
       Serial.println("FAILED TO SEND shadeMotor");
       Serial.println("REASON: " + fbdo.errorReason());
     }
-    //-------------pushing heater data to firebase----------------
+
+    //-------------setting heater data to firebase----------------
     if (Firebase.RTDB.setBool(&fbdo, "heaterBulb/isOn", digitalRead(heaterPin))){
       Serial.println("heaterBulb SENT");
       Serial.println("PATH: " + fbdo.dataPath());
@@ -293,7 +302,8 @@ void loop()
       Serial.println("FAILED TO SEND heaterBulb");
       Serial.println("REASON: " + fbdo.errorReason());
     }
-    //-------------pushing fogMachine data to firebase----------------
+
+    //-------------setting fogMachine data to firebase----------------
     if (Firebase.RTDB.setBool(&fbdo, "fogMachine/isOn", digitalRead(fogPin))){
       Serial.println("fogMachine SENT");
       Serial.println("PATH: " + fbdo.dataPath());
@@ -303,7 +313,7 @@ void loop()
       Serial.println("REASON: " + fbdo.errorReason());
     }
 
-
+    //------------------------pushing temp json to graph--------------------
     if (Firebase.RTDB.pushJSON(&fbdo, "graph/temp", &temjson)) {
       Serial.println(fbdo.dataPath());
       Serial.println(fbdo.pushName());
@@ -312,6 +322,7 @@ void loop()
       Serial.println(fbdo.errorReason());
     }
     
+    //------------------------pushing hum json to graph--------------------
     if (Firebase.RTDB.pushJSON(&fbdo, "graph/hum", &humjson)) {
       Serial.println(fbdo.dataPath());
       Serial.println(fbdo.pushName());
@@ -320,7 +331,7 @@ void loop()
       Serial.println(fbdo.errorReason());
     }
 
-
+    //------------------------pushing lux json to graph--------------------
     if (Firebase.RTDB.pushJSON(&fbdo, "graph/lux", &luxjson)) {
       Serial.println(fbdo.dataPath());
       Serial.println(fbdo.pushName());
