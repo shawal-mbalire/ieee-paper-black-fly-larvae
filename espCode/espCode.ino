@@ -12,8 +12,8 @@ IEEE Paper Black Soldier Fly BSF
 #include "addons/TokenHelper.h"
 #include "addons/RTDBHelper.h"
 
-#define WIFI_SSID     "Shawal_iOS"//"TP-Link_659A"
-#define WIFI_PASSWORD "12121217"//"98781997"
+#define WIFI_SSID     "TP-Link_659A"//"Shawal_iOS"//
+#define WIFI_PASSWORD "98781997"//"12121217"//"98781997"
 #define DATABASE_URL  "https://ieeepaper-default-rtdb.europe-west1.firebasedatabase.app"
 #define API_KEY       "AIzaSyAHDUls-v3DKM7q9X70OkXaMzIbNgWqHR4"
 #define USER_EMAIL    "esp32s@bsf.com"
@@ -21,7 +21,7 @@ IEEE Paper Black Soldier Fly BSF
 
 #define DHTTYPE   DHT22
 
-#define DHTPIN    14
+#define DHTPIN    19
 #define ldrPin    4
 #define heaterPin 18
 #define fogPin    19
