@@ -4,10 +4,10 @@ from datetime import datetime
 
 
 firebaseConfig = {
-  'apiKey'             : "AIzaSyAHDUls-v3DKM7q9X70OkXaMzIbNgWqHR4",
+  'apiKey'             : "AIzaSyAoSi4C4T65EZs0dCJCzjXXadYduAvzT_w",
   'authDomain'         : "ieeepaper.firebaseapp.com",
   'databaseURL'        : "https://ieeepaper-default-rtdb.europe-west1.firebasedatabase.app",
-  'projectId'          : "ieeepaper",
+  'projectId'          : "final-year-project-e6e81",
   'storageBucket'      : "ieeepaper.appspot.com",
   'messagingSenderId'  : "296735563322",
   'appId'              : "1:296735563322:web:8264b3da451df8ed881f03",
@@ -22,7 +22,7 @@ storage     = firebase.storage()
 
 # sign up
 def signup():
-    st.title("IEEE Paper")
+    st.title("Final Year Project")
     st.subheader("Sign Up")
     email = st.text_input("Email")
     #check if email is valid email
