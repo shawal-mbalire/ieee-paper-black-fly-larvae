@@ -22,7 +22,7 @@ storage     = firebase.storage()
 
 # sign up
 def signup():
-    st.title("Final Year Project")
+    st.title("BSF System Monitoring")
     st.subheader("Sign Up")
     email = st.text_input("Email")
     #check if email is valid email
@@ -50,7 +50,7 @@ def signup():
 
 # Login Page
 def login():
-    st.title("IEEE Paper")
+    st.title("BSF System Monitoring")
     st.subheader("Login")
     email    = st.text_input("Email")
     password = st.text_input("Password", type="password")
@@ -64,7 +64,7 @@ def login():
 
 # Main Page
 def main():
-    st.title("IEEE Paper")
+    st.title("BSF System Parameters")
     st.subheader("Main")
 
     # Get data from Firebase Realtime Database
@@ -91,7 +91,7 @@ def main():
 
 
 if __name__ == "__main__":
-    st.sidebar.title("IEEE Paper")
+    st.sidebar.title("BSF System Monitoring")
     menu = st.sidebar.radio("Menu", ["Login", "SignUp"])
     if menu == "Login":
         login()
