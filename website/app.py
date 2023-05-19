@@ -4,14 +4,14 @@ from datetime import datetime
 
 
 firebaseConfig = {
-  'apiKey'             : "AIzaSyAoSi4C4T65EZs0dCJCzjXXadYduAvzT_w",
-  'authDomain'         : "ieeepaper.firebaseapp.com",
-  'databaseURL'        : "https://ieeepaper-default-rtdb.europe-west1.firebasedatabase.app",
-  'projectId'          : "final-year-project-e6e81",
-  'storageBucket'      : "ieeepaper.appspot.com",
-  'messagingSenderId'  : "296735563322",
-  'appId'              : "1:296735563322:web:8264b3da451df8ed881f03",
-  'measurementId'      : "G-295EPTTZ0W"
+  'apiKey': "AIzaSyAtqKKRESq6bK8-2f4ypc4tb4zY5pDWXFs",
+  'authDomain': "bsf-bradley.firebaseapp.com",
+  'databaseURL': "https://bsf-bradley-default-rtdb.firebaseio.com",
+  'projectId': "bsf-bradley",
+  'storageBucket': "bsf-bradley.appspot.com",
+  'messagingSenderId': "584438088785",
+  'appId': "1:584438088785:web:6cfd98e025c04ce0212470",
+  'measurementId': "G-BMQN6WWJL1"
 }
 
 # Initialize Firebase
