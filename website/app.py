@@ -103,9 +103,9 @@ def main():
     
     st.subheader("Shade Motor")
     if st.button("Shade Motor On"):
-      db.child("shadeMotor").update({"setOn":True})
+      db.child("shadeMotor").update({"setOn":"true"})
     if st.button("Undo Shade Motor On"):
-      db.child("shadeMotor").update({"setOn":False})
+      db.child("shadeMotor").update({"setOn":"false"})
     if st.button("Shade Motor Off"):
       db.child("shadeMotor").update({"setOff":True})
     if st.button("Undo Shade Motor Off"):
