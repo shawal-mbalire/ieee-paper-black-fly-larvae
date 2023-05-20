@@ -80,7 +80,7 @@ def main():
     st.subheader("Heater bulb")
     if st.button("Heater Bulb On"):
       db.child("heaterBulb").update({"setOn":True})
-    if st.button("Undo Heater Bulb On":):
+    if st.button("Undo Heater Bulb On"):
       db.child("heaterBulb").update({"setOn":False})
     if st.button("Heater Bulb Off"):
       db.child("heaterBulb").update({"setOff":True})
