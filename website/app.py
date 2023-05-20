@@ -90,9 +90,11 @@ def main():
     
     st.subheader("Fog Machine")
     if st.button("Fog Machine On"):
-      db.child("fogMachine").update({"setOn":True})
+      #db.child("fogMachine").update({"setOn":True})
+      db.child("fogMachine").child("setOn").set(True)
     if st.button("Undo Fog Machine On"):
-      db.child("fogMachine").update({"setOn":False})
+      #db.child("fogMachine").update({"setOn":False})
+      db.child("fogMachine").child("setOn").set(False)
     if st.button('Fog Machine Off'):
       db.child("fogMachine").update({"setOff":True})
     if st.button("Undo Fog Machine Off"):
