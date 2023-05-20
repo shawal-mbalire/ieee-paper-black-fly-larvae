@@ -86,8 +86,7 @@ def main():
       db.child("heaterBulb").update({"setOff":True})
     if st.button("Undo Heater Bulb Off"):
       db.child("heaterBulb").update({"setOff":False})
-    else:
-      pass
+    
     
     st.subheader("Fog Machine")
     if st.button("Fog Machine On"):
@@ -98,20 +97,18 @@ def main():
       db.child("fogMachine").update({"setOff":True})
     if st.button("Undo Fog Machine Off"):
       db.child("fogMachine").update({"setOff":False})
-    else:
-      pass
+    
     
     st.subheader("Shade Motor")
     if st.button("Shade Motor On"):
-      db.child("shadeMotor").update({"setOn":"true"})
+      db.child("shadeMotor").update({"setOn":True})
     if st.button("Undo Shade Motor On"):
-      db.child("shadeMotor").update({"setOn":"false"})
+      db.child("shadeMotor").update({"setOn":False})
     if st.button("Shade Motor Off"):
       db.child("shadeMotor").update({"setOff":True})
     if st.button("Undo Shade Motor Off"):
       db.child("shadeMotor").update({"setOff":False})
-    else:
-      pass
+   
     
     
 #     onFog        = db.child("fogMachine").child("isOn"       ).get()
