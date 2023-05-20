@@ -69,7 +69,7 @@ def main():
 
     # Get data from Firebase Realtime Database
     lux          = db.child("BH1750"    ).child("lux"        ).get()
-    temperature  = db.child("DHT"       ).child("temperature").get()
+    temperature  = db.child("DHT"       ).child("temperature(celcius)").get()
     humidity     = db.child("DHT"       ).child("humidity"   ).get()
     
     # Display data
@@ -78,38 +78,38 @@ def main():
     st.write("Humidity: ",        humidity.val())
     
     st.subheader("Heater bulb")
-    if st.button('Heater Bulb On'):
-      db.child('heaterBulb').update({"setOn":True})
-    if st.button('Undo Heater Bulb On'):
-      db.child('heaterBulb').update({"setOn":False})
-    if st.button('Heater Bulb Off'):
-      db.child('heaterBulb').update({"setOff":True})
-    if st.button('Undo Heater Bulb Off'):
-      db.child('heaterBulb').update({"setOff":False})
+    if st.button("Heater Bulb On"):
+      db.child("heaterBulb").update({"setOn":True})
+    if st.button("Undo Heater Bulb On":):
+      db.child("heaterBulb").update({"setOn":False})
+    if st.button("Heater Bulb Off"):
+      db.child("heaterBulb").update({"setOff":True})
+    if st.button("Undo Heater Bulb Off"):
+      db.child("heaterBulb").update({"setOff":False})
     else:
       pass
     
     st.subheader("Fog Machine")
-    if st.button('Fog Machine On'):
-      db.child('fogMachine').update({"setOn":True})
-    if st.button('Undo Fog Machine On'):
-      db.child('fogMachine').update({"setOn":False})
+    if st.button("Fog Machine On"):
+      db.child("fogMachine").update({"setOn":True})
+    if st.button("Undo Fog Machine On"):
+      db.child("fogMachine").update({"setOn":False})
     if st.button('Fog Machine Off'):
-      db.child('fogMachine').update({"setOff":True})
-    if st.button('Undo Fog Machine Off'):
-      db.child('fogMachine').update({"setOff":False})
+      db.child("fogMachine").update({"setOff":True})
+    if st.button("Undo Fog Machine Off"):
+      db.child("fogMachine").update({"setOff":False})
     else:
       pass
     
     st.subheader("Shade Motor")
-    if st.button('Shade Motor On'):
-      db.child('shadeMotor').update({"setOn":True})
-    if st.button('Undo Shade Motor On'):
-      db.child('shadeMotor').update({"setOn":False})
-    if st.button('Shade Motor Off'):
-      db.child('shadeMotor').update({"setOff":True})
-    if st.button('Undo Shade Motor Off'):
-      db.child('shadeMotor').update({"setOff":False})
+    if st.button("Shade Motor On"):
+      db.child("shadeMotor").update({"setOn":True})
+    if st.button("Undo Shade Motor On"):
+      db.child("shadeMotor").update({"setOn":False})
+    if st.button("Shade Motor Off"):
+      db.child("shadeMotor").update({"setOff":True})
+    if st.button("Undo Shade Motor Off"):
+      db.child("shadeMotor").update({"setOff":False})
     else:
       pass
     
