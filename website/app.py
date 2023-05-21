@@ -67,21 +67,21 @@ def login():
 
 
 
-def fogMachine():
-  fogOn = st.button("Fog Machine on")
-  undoFogOn = st.button("Undo Fog Machine on")
-  fogOff = st.button("Fog Machine off")
-  undoFogOff = st.button("Undo fog machine off")
-  if fogOn:
-    db.child("fogMachine").update({"setOn":True})
-  elif undoFogOn:
-    db.child("fogMachine").update({"setOn":False})
-  elif fogOff:
-    db.child("fogMachine").update({"setOff":True})
-  elif undoFogOff:
-    db.child("fogMachine").update({"setOn":False})
-  else:
-    pass
+# def fogMachine():
+#   fogOn = st.button("Fog Machine on")
+#   undoFogOn = st.button("Undo Fog Machine on")
+#   fogOff = st.button("Fog Machine off")
+#   undoFogOff = st.button("Undo fog machine off")
+#   if fogOn:
+#     db.child("fogMachine").update({"setOn":True})
+#   elif undoFogOn:
+#     db.child("fogMachine").update({"setOn":False})
+#   elif fogOff:
+#     db.child("fogMachine").update({"setOff":True})
+#   elif undoFogOff:
+#     db.child("fogMachine").update({"setOn":False})
+#   else:
+#     pass
 
 # def shadeMotor():
 
@@ -101,7 +101,8 @@ def main():
     st.write("Temperature: ",     temperature.val())
     st.write("Humidity: ",        humidity.val())
     
-    fogMachine()
+    # fogMachine()
+    db.child("fogMachine").update({"setOn":False})
     
     
 #     onFog        = db.child("fogMachine").child("isOn"       ).get()
