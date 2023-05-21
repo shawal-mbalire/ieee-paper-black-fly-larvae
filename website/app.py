@@ -62,46 +62,29 @@ def login():
         except:
             st.error("Invalid Email or Password")
 
-def heaterBulb():
-  #st.subheader("Heater Bulb")
-  if st.button("Heater Bulb On"):
-    db.child("heaterBulb").update({"setOn":True})
-  elif st.button("Undo Heater Bulb On"):
-    db.child("heaterBulb").update({"setOn":False})
-  elif st.button("Heater Bulb Off"):
-    db.child("heaterBulb").update({"setOff":True})
-  elif st.button("Undo Heater Bulb Off"):
-    db.child("heaterBulb").update({"setOff":False})
-  else:
-    pass
+# def heaterBulb():
+  
+
+
 
 def fogMachine():
-  #st.subheader("Fog Machine")
-  if st.button("Fog Machine On"):
-    db.child("fogMachine").update({"setOn":True})
-    #db.child("fogMachine").child("setOn").set(True)
-  elif st.button("Undo Fog Machine On"):
-    db.child("fogMachine").update({"setOn":False})
-    #db.child("fogMachine").child("setOn").set(False)
-  elif st.button('Fog Machine Off'):
-    db.child("fogMachine").update({"setOff":True})
-  elif st.button("Undo Fog Machine Off"):
-    db.child("fogMachine").update({"setOff":False})
+  fogOn = st.button("Fog Machine on")
+  undoFogOn = st.button("Undo Fog Machine on")
+  fogOff = st.button("Fog Machine off")
+  undoFogOff = st.button("Undo fog machine off")
+  if fogOn:
+    db.child("fogMachine").update({"setOn":fogOn})
+  elif undoFogOn:
+    db.child("fogMachine").update({"setOn":undoFogOn})
+  elif fogOff:
+    db.child("fogMachine").update({"setOff":fogOff})
+  elif undoFogOff:
+    db.child("fogMachine").update({"setOn":undoFogOn})
   else:
     pass
 
-def shadeMotor():
-  #st.subheader("Shade Motor")
-  if st.button("Shade Motor On"):
-    db.child("shadeMotor").update({"setOn":True})
-  elif st.button("Undo Shade Motor On"):
-    db.child("shadeMotor").update({"setOn":False})
-  elif st.button("Shade Motor Off"):
-    db.child("shadeMotor").update({"setOff":True})
-  elif st.button("Undo Shade Motor Off"):
-    db.child("shadeMotor").update({"setOff":False})
-  else:
-    pass
+# def shadeMotor():
+
   
 # Main Page
 def main():
@@ -118,14 +101,8 @@ def main():
     st.write("Temperature: ",     temperature.val())
     st.write("Humidity: ",        humidity.val())
     
-    if st.button("Heater Bulb"):
-      heaterBulb()
-    elif st.button("Fog Machine"):
-      fogMachine()
-    elif st.button("Sahde Motor"):
-      shadeMotor()
-    else:
-      pass
+    fogMachine()
+    
     
 #     onFog        = db.child("fogMachine").child("isOn"       ).get()
 #     offFog       = db.child("fogMachine").child("isOff"      ).get()
