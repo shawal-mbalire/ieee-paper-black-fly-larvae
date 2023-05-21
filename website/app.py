@@ -73,13 +73,13 @@ def fogMachine():
   fogOff = st.button("Fog Machine off")
   undoFogOff = st.button("Undo fog machine off")
   if fogOn:
-    db.child("fogMachine").update({"setOn":fogOn})
+    db.child("fogMachine").update({"setOn":True})
   elif undoFogOn:
-    db.child("fogMachine").update({"setOn":undoFogOn})
+    db.child("fogMachine").update({"setOn":False})
   elif fogOff:
-    db.child("fogMachine").update({"setOff":fogOff})
+    db.child("fogMachine").update({"setOff":True})
   elif undoFogOff:
-    db.child("fogMachine").update({"setOn":undoFogOn})
+    db.child("fogMachine").update({"setOn":False})
   else:
     pass
 
