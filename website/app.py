@@ -78,7 +78,7 @@ def main():
     st.write("Humidity: ",        humidity.val())
     
     #Heater Bulb
-     st.subheader("Heater Bulb")
+    st.subheader("Heater Bulb")
     if st.button("Heater Bulb On"):
       db.child("heaterBulb").update({"setOn":True})
     elif st.button("Undo Heater Bulb On"):
@@ -106,7 +106,7 @@ def main():
       pass
     
     #Shade Motor
-     st.subheader("Shade Motor")
+    st.subheader("Shade Motor")
     if st.button("Shade Motor On"):
       db.child("shadeMotor").update({"setOn":True})
     elif st.button("Undo Shade Motor On"):
