@@ -104,8 +104,10 @@ def main():
     # fogMachine()
     if st.button("Fog Machine"):
       db.child("fogMachine").update({"setOn":True})
+      st.write("Performing task")
     elif st.button("Undo Fog Machine"):
       db.child("fogMachine").update({"setOn":False})
+      st.write("Unperforming task")
     
 #     onFog        = db.child("fogMachine").child("isOn"       ).get()
 #     offFog       = db.child("fogMachine").child("isOff"      ).get()
