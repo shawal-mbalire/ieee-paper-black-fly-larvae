@@ -62,6 +62,47 @@ def login():
         except:
             st.error("Invalid Email or Password")
 
+def heaterBulb():
+  st.subheader("Heater Bulb")
+  if st.button("Heater Bulb On"):
+    db.child("heaterBulb").update({"setOn":True})
+  elif st.button("Undo Heater Bulb On"):
+    db.child("heaterBulb").update({"setOn":False})
+  elif st.button("Heater Bulb Off"):
+    db.child("heaterBulb").update({"setOff":True})
+  elif st.button("Undo Heater Bulb Off"):
+    db.child("heaterBulb").update({"setOff":False})
+  else:
+    pass
+
+def fogMachine():
+  st.subheader("Fog Machine")
+  if st.button("Fog Machine On"):
+    db.child("fogMachine").update({"setOn":True})
+    #db.child("fogMachine").child("setOn").set(True)
+  elif st.button("Undo Fog Machine On"):
+    db.child("fogMachine").update({"setOn":False})
+    #db.child("fogMachine").child("setOn").set(False)
+  elif st.button('Fog Machine Off'):
+    db.child("fogMachine").update({"setOff":True})
+  elif st.button("Undo Fog Machine Off"):
+    db.child("fogMachine").update({"setOff":False})
+  else:
+    pass
+
+def shadeMotor():
+  st.subheader("Shade Motor")
+  if st.button("Shade Motor On"):
+    db.child("shadeMotor").update({"setOn":True})
+  elif st.button("Undo Shade Motor On"):
+    db.child("shadeMotor").update({"setOn":False})
+  elif st.button("Shade Motor Off"):
+    db.child("shadeMotor").update({"setOff":True})
+  elif st.button("Undo Shade Motor Off"):
+    db.child("shadeMotor").update({"setOff":False})
+  else:
+    pass
+  
 # Main Page
 def main():
     st.title("BSF System")
@@ -77,48 +118,9 @@ def main():
     st.write("Temperature: ",     temperature.val())
     st.write("Humidity: ",        humidity.val())
     
-    #Heater Bulb
-    st.subheader("Heater Bulb")
-    if st.button("Heater Bulb On"):
-      db.child("heaterBulb").update({"setOn":True})
-    elif st.button("Undo Heater Bulb On"):
-      db.child("heaterBulb").update({"setOn":False})
-    elif st.button("Heater Bulb Off"):
-      db.child("heaterBulb").update({"setOff":True})
-    elif st.button("Undo Heater Bulb Off"):
-      db.child("heaterBulb").update({"setOff":False})
-    else:
-      pass
-    
-    
-    st.subheader("Fog Machine")
-    if st.button("Fog Machine On"):
-      db.child("fogMachine").update({"setOn":True})
-      #db.child("fogMachine").child("setOn").set(True)
-    elif st.button("Undo Fog Machine On"):
-      db.child("fogMachine").update({"setOn":False})
-      #db.child("fogMachine").child("setOn").set(False)
-    elif st.button('Fog Machine Off'):
-      db.child("fogMachine").update({"setOff":True})
-    elif st.button("Undo Fog Machine Off"):
-      db.child("fogMachine").update({"setOff":False})
-    else:
-      pass
-    
-    #Shade Motor
-    st.subheader("Shade Motor")
-    if st.button("Shade Motor On"):
-      db.child("shadeMotor").update({"setOn":True})
-    elif st.button("Undo Shade Motor On"):
-      db.child("shadeMotor").update({"setOn":False})
-    elif st.button("Shade Motor Off"):
-      db.child("shadeMotor").update({"setOff":True})
-    elif st.button("Undo Shade Motor Off"):
-      db.child("shadeMotor").update({"setOff":False})
-    else:
-      pass
-   
-    
+    heaterBulb()
+    fogMachine()
+    shadeMotor()
     
 #     onFog        = db.child("fogMachine").child("isOn"       ).get()
 #     offFog       = db.child("fogMachine").child("isOff"      ).get()
