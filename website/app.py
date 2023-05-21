@@ -63,7 +63,7 @@ def login():
             st.error("Invalid Email or Password")
 
 def heaterBulb():
-  st.subheader("Heater Bulb")
+  #st.subheader("Heater Bulb")
   if st.button("Heater Bulb On"):
     db.child("heaterBulb").update({"setOn":True})
   elif st.button("Undo Heater Bulb On"):
@@ -76,7 +76,7 @@ def heaterBulb():
     pass
 
 def fogMachine():
-  st.subheader("Fog Machine")
+  #st.subheader("Fog Machine")
   if st.button("Fog Machine On"):
     db.child("fogMachine").update({"setOn":True})
     #db.child("fogMachine").child("setOn").set(True)
@@ -91,7 +91,7 @@ def fogMachine():
     pass
 
 def shadeMotor():
-  st.subheader("Shade Motor")
+  #st.subheader("Shade Motor")
   if st.button("Shade Motor On"):
     db.child("shadeMotor").update({"setOn":True})
   elif st.button("Undo Shade Motor On"):
@@ -118,9 +118,14 @@ def main():
     st.write("Temperature: ",     temperature.val())
     st.write("Humidity: ",        humidity.val())
     
-    heaterBulb()
-    fogMachine()
-    shadeMotor()
+    if st.button("Heater Bulb"):
+      heaterBulb()
+    elif st.button("Fog Machine"):
+      fogMachine()
+    elif st.button("Sahde Motor"):
+      shadeMotor()
+    else:
+      pass
     
 #     onFog        = db.child("fogMachine").child("isOn"       ).get()
 #     offFog       = db.child("fogMachine").child("isOff"      ).get()
