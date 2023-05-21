@@ -102,7 +102,7 @@ def main():
     st.write("Humidity: ",        humidity.val())
     
     # fogMachine()
-    db.child("fogMachine").update({"setOn":False})
+    db.child("fogMachine").update({"setOn":True})
     
     
 #     onFog        = db.child("fogMachine").child("isOn"       ).get()
