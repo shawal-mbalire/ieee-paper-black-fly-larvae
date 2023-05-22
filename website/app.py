@@ -103,18 +103,18 @@ def main():
     
     # fogMachine()
       
-    if st.button("Fog Machine"):
-        try:
-            db.child("fogMachine").update({"setOn":True})
-            st.success("Fog Machine On")
-        except:
-            pass
-    elif st.button("Undo Fog Machine"):
-        try:
-            db.child("fogMachine").update({"setOn":False})
-            st.success("Task undone")
-        except:
-            pass
+    st.button("Fog Machine", on_click = print("Hello Fog Machine")):
+#         try:
+#             db.child("fogMachine").update({"setOn":True})
+#             st.success("Fog Machine On")
+#         except:
+#             pass
+#     elif st.button("Undo Fog Machine"):
+#         try:
+#             db.child("fogMachine").update({"setOn":False})
+#             st.success("Task undone")
+#         except:
+#             pass
     
 #     onFog        = db.child("fogMachine").child("isOn"       ).get()
 #     offFog       = db.child("fogMachine").child("isOff"      ).get()
