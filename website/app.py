@@ -64,7 +64,7 @@ def login():
   
 def fogMachine():
   st.title("Fog Machine Control")
-  menu = st.radio("Menu", ["Turn On", "Undo Turn On","Turn Off","Undo Turn Off"])
+  menu = st.radio("Menu", ["Turn On Inactive","Turn On ",,"Turn Off Inactive","Turn Off"])
   if menu == "Turn On":
     db.child("fogMachine").update({"setOn":True})
     st.success("Fog machine turned on")
@@ -77,6 +77,39 @@ def fogMachine():
   elif menu == "Undo Turn Off":
     db.child("fogMachine").update({"setOff":False})
     st.success("Action Undone")
+ 
+def heater():
+  st.title("Heater Bulb Control")
+  menu = st.radio("Menu", ["Turn On Inactive","Turn On ",,"Turn Off Inactive","Turn Off"])
+  if menu == "Turn On":
+    db.child("heaterBulb").update({"setOn":True})
+    st.success("Fog machine turned on")
+  elif menu == "Turn On Inactive":
+    db.child("heaterBulb").update({"setOn":False})
+    st.success("Action Undone")
+  elif menu == "Turn Off":
+    db.child("heaterBulb").update({"setOff":True})
+    st.success("Fog machine turned off")
+  elif menu == "Turn Off Inactive":
+    db.child("heaterBulb").update({"setOff":False})
+    st.success("Action Undone")    
+    
+def shade():
+  st.title("Shade Motor Control")
+  menu = st.radio("Menu", ["Turn On Inactive","Turn On ",,"Turn Off Inactive","Turn Off"])
+  if menu == "Turn On":
+    db.child("shadeMotor").update({"setOn":True})
+    st.success("Fog machine turned on")
+  elif menu == "Turn On Inactive":
+    db.child("shadeMotor").update({"setOn":False})
+    st.success("Action Undone")
+  elif menu == "Turn Off":
+    db.child("shadeMotor").update({"setOff":True})
+    st.success("Fog machine turned off")
+  elif menu == "Turn Off Inactive":
+    db.child("shadeMotor").update({"setOff":False})
+    st.success("Action Undone")
+    
     
 # Main Page
 def main():
@@ -93,14 +126,13 @@ def main():
     st.write("Temperature: ",     temperature.val())
     st.write("Humidity: ",        humidity.val())
     
-    st.button("Fog Machine", on_click = show())    
-    
-def show():
-    db.child("fogMachine").update({"setOn":True})
-    st.success("Fog Machine On")
-    #st.write("Hello Fog Machine")
-    main()
-    
+    menu = st.sidebar.radio("Menu",["Heater Bulb","Fog Machine","Shade Motor"])
+    if menu == "Heater Bulb":
+      heater()
+    elif menu == "Fog Machine":
+      fogMachine()
+    elif menu == "Shade Motor":
+      shade()
     
     
 #       try:
@@ -151,7 +183,7 @@ def show():
 
 if __name__ == "__main__":
     st.sidebar.title("BSF System Monitoring")
-    menu = st.sidebar.radio("Menu", ["Login", "SignUp",""])
+    menu = st.sidebar.radio("Menu", ["Login", "SignUp"])
     if menu == "Login":
         login()
     elif menu == "SignUp":
