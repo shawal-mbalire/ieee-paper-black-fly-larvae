@@ -84,8 +84,7 @@ def login():
 #     pass
 
 # def shadeMotor():
-def show():
-  st.write("Hello Fog Machine")
+
   
 # Main Page
 def main():
@@ -103,8 +102,15 @@ def main():
     st.write("Humidity: ",        humidity.val())
     
     # fogMachine()
+    def show():
+      st.write("Hello Fog Machine")  
+    if st.button("Fog Machine", on_click = show()):
+      try:
+        st.write("Hello Fog Machine")
+      except:
+        st.write("Failed")
       
-    st.button("Fog Machine", on_click = show())
+      
 #         try:
 #             db.child("fogMachine").update({"setOn":True})
 #             st.success("Fog Machine On")
