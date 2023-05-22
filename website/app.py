@@ -101,14 +101,16 @@ def main():
     st.write("Temperature: ",     temperature.val())
     st.write("Humidity: ",        humidity.val())
     
-    # fogMachine()
-    def show():
-        db.child("fogMachine").update({"setOn":True})
-        st.success("Fog Machine On")
-        #st.write("Hello Fog Machine")
-        main()
-    if st.button("Fog Machine", on_click = show()):
-        st.write("")
+    st.button("Fog Machine", on_click = show())    
+    
+def show():
+    db.child("fogMachine").update({"setOn":True})
+    st.success("Fog Machine On")
+    #st.write("Hello Fog Machine")
+    main()
+    
+    
+    
 #       try:
 #           db.child("fogMachine").update({"setOn":True})
 #           st.success("Fog Machine On")
