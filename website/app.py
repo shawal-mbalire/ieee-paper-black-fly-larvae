@@ -103,7 +103,7 @@ def main():
     
     # fogMachine()
       
-    st.button("Fog Machine", on_click = print("Hello Fog Machine")):
+    st.button("Fog Machine", on_click = print("Hello Fog Machine"))
 #         try:
 #             db.child("fogMachine").update({"setOn":True})
 #             st.success("Fog Machine On")
