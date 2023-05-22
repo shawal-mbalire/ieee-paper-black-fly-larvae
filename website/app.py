@@ -103,18 +103,18 @@ def main():
     
     # fogMachine()
     def show():
-      db.child("fogMachine").update({"setOn":True})
-      st.success("Fog Machine On")
-      st.write("Hello Fog Machine")
-      main()
-    if st.button("Fog Machine", on_click = show()):
+        db.child("fogMachine").update({"setOn":True})
+        st.success("Fog Machine On")
+        st.write("Hello Fog Machine")
+        main()
+    st.button("Fog Machine", on_click = show())
 #       try:
-#         db.child("fogMachine").update({"setOn":True})
-#         st.success("Fog Machine On")
-#         st.write("Hello Fog Machine")
-#         main()
+#           db.child("fogMachine").update({"setOn":True})
+#           st.success("Fog Machine On")
+#           st.write("Hello Fog Machine")
+#           main()
 #       except:
-#         st.write("Failed")
+#           st.write("Failed")
       
       
 #         try:
