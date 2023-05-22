@@ -105,9 +105,10 @@ def main():
     def show():
         db.child("fogMachine").update({"setOn":True})
         st.success("Fog Machine On")
-        st.write("Hello Fog Machine")
+        #st.write("Hello Fog Machine")
         main()
-    st.button("Fog Machine", on_click = show())
+    if st.button("Fog Machine", on_click = show()):
+        st.write("")
 #       try:
 #           db.child("fogMachine").update({"setOn":True})
 #           st.success("Fog Machine On")
