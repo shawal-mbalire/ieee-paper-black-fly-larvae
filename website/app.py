@@ -64,7 +64,7 @@ def login():
   
 def fogMachine():
   st.title("Fog Machine Control")
-  menu = st.radio("Menu", ["Turn On Inactive","Turn On ",,"Turn Off Inactive","Turn Off"])
+  menu = st.radio("Menu", ["Turn On Inactive","Turn On ","Turn Off Inactive","Turn Off"])
   if menu == "Turn On":
     db.child("fogMachine").update({"setOn":True})
     st.success("Fog machine turned on")
@@ -80,7 +80,7 @@ def fogMachine():
  
 def heater():
   st.title("Heater Bulb Control")
-  menu = st.radio("Menu", ["Turn On Inactive","Turn On ",,"Turn Off Inactive","Turn Off"])
+  menu = st.radio("Menu", ["Turn On Inactive","Turn On ","Turn Off Inactive","Turn Off"])
   if menu == "Turn On":
     db.child("heaterBulb").update({"setOn":True})
     st.success("Fog machine turned on")
@@ -96,7 +96,7 @@ def heater():
     
 def shade():
   st.title("Shade Motor Control")
-  menu = st.radio("Menu", ["Turn On Inactive","Turn On ",,"Turn Off Inactive","Turn Off"])
+  menu = st.radio("Menu", ["Turn On Inactive","Turn On ","Turn Off Inactive","Turn Off"])
   if menu == "Turn On":
     db.child("shadeMotor").update({"setOn":True})
     st.success("Fog machine turned on")
