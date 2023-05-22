@@ -22,8 +22,8 @@ storage     = firebase.storage()
 
 # sign up
 def signup():
-    st.title("BSF System Monitoring")
-    st.subheader("Sign Up")
+    st.title("BSF SYSTEM")
+    st.subheader("Sign Up Page")
     email = st.text_input("Email")
     #check if email is valid email
     if email:
@@ -50,8 +50,8 @@ def signup():
 
 # Login Page
 def login():
-    st.title("BSF System Monitoring")
-    st.subheader("Login")
+    st.title("BSF SYSTEM")
+    st.subheader("Login Page")
     email    = st.text_input("Email")
     password = st.text_input("Password", type="password")
     if st.button("Login"):
@@ -61,31 +61,23 @@ def login():
             main()
         except:
             st.error("Invalid Email or Password")
-
-# def heaterBulb():
   
-
-
-
-# def fogMachine():
-#   fogOn = st.button("Fog Machine on")
-#   undoFogOn = st.button("Undo Fog Machine on")
-#   fogOff = st.button("Fog Machine off")
-#   undoFogOff = st.button("Undo fog machine off")
-#   if fogOn:
-#     db.child("fogMachine").update({"setOn":True})
-#   elif undoFogOn:
-#     db.child("fogMachine").update({"setOn":False})
-#   elif fogOff:
-#     db.child("fogMachine").update({"setOff":True})
-#   elif undoFogOff:
-#     db.child("fogMachine").update({"setOn":False})
-#   else:
-#     pass
-
-# def shadeMotor():
-
-  
+def fogMachine():
+  st.title("Fog Machine Control")
+  menu = st.radio("Menu", ["Turn On", "Undo Turn On","Turn Off","Undo Turn Off"])
+  if menu == "Turn On":
+    db.child("fogMachine").update({"setOn":True})
+    st.success("Fog machine turned on")
+  elif menu == "Undo Turn On":
+    db.child("fogMachine").update({"setOn":False})
+    st.success("Action Undone")
+  elif menu == "Turn Off":
+    db.child("fogMachine").update({"setOff":True})
+    st.success("Fog machine turned off")
+  elif menu == "Undo Turn Off":
+    db.child("fogMachine").update({"setOff":False})
+    st.success("Action Undone")
+    
 # Main Page
 def main():
     st.title("BSF System")
@@ -159,7 +151,7 @@ def show():
 
 if __name__ == "__main__":
     st.sidebar.title("BSF System Monitoring")
-    menu = st.sidebar.radio("Menu", ["Login", "SignUp"])
+    menu = st.sidebar.radio("Menu", ["Login", "SignUp",""])
     if menu == "Login":
         login()
     elif menu == "SignUp":
