@@ -66,15 +66,19 @@ def fogMachine():
   st.title("Fog Machine Control")
   menu = st.radio("Menu", ["Turn On Inactive","Turn On ","Turn Off Inactive","Turn Off"])
   if menu == "Turn On":
+    st.experimental_set_query_params(menu = "Turn On")
     db.child("fogMachine").update({"setOn":True})
     st.success("Fog machine turned on")
-  elif menu == "Undo Turn On":
+  elif menu == "Turn On Inactive":
+    st.experimental_set_query_params(menu = "Turn On Inactive")
     db.child("fogMachine").update({"setOn":False})
     st.success("Action Undone")
   elif menu == "Turn Off":
+    st.experimental_set_query_params(menu = "Turn Off")
     db.child("fogMachine").update({"setOff":True})
     st.success("Fog machine turned off")
-  elif menu == "Undo Turn Off":
+  elif menu == "Turn Off Inactive":
+    st.experimental_set_query_params(menu = "Turn Off Inactive")
     db.child("fogMachine").update({"setOff":False})
     st.success("Action Undone")
  
@@ -82,15 +86,19 @@ def heater():
   st.title("Heater Bulb Control")
   menu = st.radio("Menu", ["Turn On Inactive","Turn On ","Turn Off Inactive","Turn Off"])
   if menu == "Turn On":
+    st.experimental_set_query_params(menu = "Turn On")
     db.child("heaterBulb").update({"setOn":True})
     st.success("Fog machine turned on")
   elif menu == "Turn On Inactive":
+    st.experimental_set_query_params(menu = "Turn On Inactive")
     db.child("heaterBulb").update({"setOn":False})
     st.success("Action Undone")
   elif menu == "Turn Off":
+    st.experimental_set_query_params(menu = "Turn Off")
     db.child("heaterBulb").update({"setOff":True})
     st.success("Fog machine turned off")
   elif menu == "Turn Off Inactive":
+    st.experimental_set_query_params(menu = "Turn Off Inactive")
     db.child("heaterBulb").update({"setOff":False})
     st.success("Action Undone")    
     
@@ -98,15 +106,19 @@ def shade():
   st.title("Shade Motor Control")
   menu = st.radio("Menu", ["Turn On Inactive","Turn On ","Turn Off Inactive","Turn Off"])
   if menu == "Turn On":
+    st.experimental_set_query_params(menu = "Turn On")
     db.child("shadeMotor").update({"setOn":True})
     st.success("Fog machine turned on")
   elif menu == "Turn On Inactive":
+    st.experimental_set_query_params(menu = "Turn On Inactive")
     db.child("shadeMotor").update({"setOn":False})
     st.success("Action Undone")
   elif menu == "Turn Off":
+    st.experimental_set_query_params(menu = "Turn Off")
     db.child("shadeMotor").update({"setOff":True})
     st.success("Fog machine turned off")
   elif menu == "Turn Off Inactive":
+    st.experimental_set_query_params(menu = "Turn Off Inactive")
     db.child("shadeMotor").update({"setOff":False})
     st.success("Action Undone")
     
@@ -128,10 +140,13 @@ def main():
     
     menu = st.sidebar.radio("Menu",["Heater Bulb","Fog Machine","Shade Motor"])
     if menu == "Heater Bulb":
+      st.experimental_set_query_params(menu = "Heater Bulb")
       heater()
     elif menu == "Fog Machine":
+      st.experimental_set_query_params(menu = "Fog Machine")
       fogMachine()
     elif menu == "Shade Motor":
+      st.experimental_set_query_params(menu = "Shade Motor")
       shade()
     
     
