@@ -61,68 +61,7 @@ def login():
             main()
         except:
             st.error("Invalid Email or Password")
-  
-def fogMachine():
-  st.title("Fog Machine Control")
-  menu = st.radio("Menu", ["Turn On Inactive","Turn On ","Turn Off Inactive","Turn Off"])
-  if menu == "Turn On":
-    st.experimental_set_query_params(menu = "Turn On")
-    db.child("fogMachine").update({"setOn":True})
-    st.success("Fog machine turned on")
-  elif menu == "Turn On Inactive":
-    st.experimental_set_query_params(menu = "Turn On Inactive")
-    db.child("fogMachine").update({"setOn":False})
-    st.success("Action Undone")
-  elif menu == "Turn Off":
-    st.experimental_set_query_params(menu = "Turn Off")
-    db.child("fogMachine").update({"setOff":True})
-    st.success("Fog machine turned off")
-  elif menu == "Turn Off Inactive":
-    st.experimental_set_query_params(menu = "Turn Off Inactive")
-    db.child("fogMachine").update({"setOff":False})
-    st.success("Action Undone")
- 
-def heater():
-  st.title("Heater Bulb Control")
-  menu = st.radio("Menu", ["Turn On Inactive","Turn On ","Turn Off Inactive","Turn Off"])
-  if menu == "Turn On":
-    st.experimental_set_query_params(menu = "Turn On")
-    db.child("heaterBulb").update({"setOn":True})
-    st.success("Fog machine turned on")
-  elif menu == "Turn On Inactive":
-    st.experimental_set_query_params(menu = "Turn On Inactive")
-    db.child("heaterBulb").update({"setOn":False})
-    st.success("Action Undone")
-  elif menu == "Turn Off":
-    st.experimental_set_query_params(menu = "Turn Off")
-    db.child("heaterBulb").update({"setOff":True})
-    st.success("Fog machine turned off")
-  elif menu == "Turn Off Inactive":
-    st.experimental_set_query_params(menu = "Turn Off Inactive")
-    db.child("heaterBulb").update({"setOff":False})
-    st.success("Action Undone")    
-    
-def shade():
-  st.title("Shade Motor Control")
-  menu = st.radio("Menu", ["Turn On Inactive","Turn On ","Turn Off Inactive","Turn Off"])
-  if menu == "Turn On":
-    st.experimental_set_query_params(menu = "Turn On")
-    db.child("shadeMotor").update({"setOn":True})
-    st.success("Fog machine turned on")
-  elif menu == "Turn On Inactive":
-    st.experimental_set_query_params(menu = "Turn On Inactive")
-    db.child("shadeMotor").update({"setOn":False})
-    st.success("Action Undone")
-  elif menu == "Turn Off":
-    st.experimental_set_query_params(menu = "Turn Off")
-    db.child("shadeMotor").update({"setOff":True})
-    st.success("Fog machine turned off")
-  elif menu == "Turn Off Inactive":
-    st.experimental_set_query_params(menu = "Turn Off Inactive")
-    db.child("shadeMotor").update({"setOff":False})
-    st.success("Action Undone")
-    
-    
+     
 # Main Page
 def main():
     st.title("BSF System")
@@ -138,38 +77,22 @@ def main():
     st.write("Temperature: ",     temperature.val())
     st.write("Humidity: ",        humidity.val())
     
-    menu = st.sidebar.radio("Menu",["Heater Bulb","Fog Machine","Shade Motor"])
-    if menu == "Heater Bulb":
-      st.experimental_set_query_params(menu = "Heater Bulb")
-      heater()
-    elif menu == "Fog Machine":
-      st.experimental_set_query_params(menu = "Fog Machine")
-      fogMachine()
-    elif menu == "Shade Motor":
-      st.experimental_set_query_params(menu = "Shade Motor")
-      shade()
-    
-    
-#       try:
-#           db.child("fogMachine").update({"setOn":True})
-#           st.success("Fog Machine On")
-#           st.write("Hello Fog Machine")
-#           main()
-#       except:
-#           st.write("Failed")
-      
-      
-#         try:
-#             db.child("fogMachine").update({"setOn":True})
-#             st.success("Fog Machine On")
-#         except:
-#             pass
-#     elif st.button("Undo Fog Machine"):
-#         try:
-#             db.child("fogMachine").update({"setOn":False})
-#             st.success("Task undone")
-#         except:
-#             pass
+    st.button(
+      "Fog Machine On",
+      on_click = db.child("fogMachine").update({"setOn":True})
+    )
+    st.button(
+      "Undo Fog Machine On",
+      on_click = db.child("fogMachine").update({"setOn":False})
+    )
+    st.button(
+      "Fog Machine Off",
+      on_click = db.child("fogMachine").update({"setOff":True})
+    )
+    st.button(
+      "Undo Fog Machine Off",
+      on_click = db.child("fogMachine").update({"setOff":False})
+    )
     
 #     onFog        = db.child("fogMachine").child("isOn"       ).get()
 #     offFog       = db.child("fogMachine").child("isOff"      ).get()
