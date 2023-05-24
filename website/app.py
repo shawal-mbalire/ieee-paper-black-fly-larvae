@@ -77,21 +77,34 @@ def main():
     st.write("Temperature: ",     temperature.val())
     st.write("Humidity: ",        humidity.val())
     
+    def FogOn():
+      db.child("fogMachine").update({"setOn":True})
+      
+    def undoFogOn():
+      db.child("fogMachine").update({"setOn":False})
+      
+    def FogOff():
+      db.child("fogMachine").update({"setOff":True})
+    
+    def undoFogOff():
+      db.child("fogMachine").update({"setOff":False})
+      
+      
     st.button(
       "Fog Machine On",
-      on_click = db.child("fogMachine").child("setOn").set(True)
+      on_click = FogOn()
     )
     st.button(
       "Undo Fog Machine On",
-      on_click = db.child("fogMachine").child("setOn").set(False)
+      on_click = undoFogOn()
     )
     st.button(
       "Fog Machine Off",
-      on_click = db.child("fogMachine").child("setOff").set(True)
+      on_click = FogOff()
     )
     st.button(
       "Undo Fog Machine Off",
-      on_click = db.child("fogMachine").child("setOff").set(False)
+      on_click = undoFogOff()
     )
     
 #     onFog        = db.child("fogMachine").child("isOn"       ).get()
@@ -120,11 +133,12 @@ def main():
 
 
 if __name__ == "__main__":
-    st.sidebar.title("BSF System Monitoring")
-    menu = st.sidebar.radio("Menu", ["Login", "SignUp"])
-    if menu == "Login":
-        login()
-    elif menu == "SignUp":
-        signup()
+  main()
+#     st.sidebar.title("BSF System Monitoring")
+#     menu = st.sidebar.radio("Menu", ["Login", "SignUp"])
+#     if menu == "Login":
+#         login()
+#     elif menu == "SignUp":
+#         signup()
 
 #I hope this helps you to get started with Firebase and Streamlit. If you have any questions, please let me know in the comments below.
