@@ -79,19 +79,19 @@ def main():
     
     st.button(
       "Fog Machine On",
-      on_click = db.child("fogMachine").update({"setOn":True})
+      on_click = db.child("fogMachine").child("setOn").set(True)
     )
     st.button(
       "Undo Fog Machine On",
-      on_click = db.child("fogMachine").update({"setOn":False})
+      on_click = db.child("fogMachine").child("setOn").set(False)
     )
     st.button(
       "Fog Machine Off",
-      on_click = db.child("fogMachine").update({"setOff":True})
+      on_click = db.child("fogMachine").child("setOff").set(True)
     )
     st.button(
       "Undo Fog Machine Off",
-      on_click = db.child("fogMachine").update({"setOff":False})
+      on_click = db.child("fogMachine").child("setOff").set(False)
     )
     
 #     onFog        = db.child("fogMachine").child("isOn"       ).get()
