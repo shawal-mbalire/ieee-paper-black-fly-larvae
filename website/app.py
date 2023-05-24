@@ -78,16 +78,16 @@ def main():
     st.write("Humidity: ",        humidity.val())
     
     def FogOn():
-      db.child("fogMachine").child("setOn").set(True)
+      db.child("fogMachine").child("setOn").setValue(True)
       
     def undoFogOn():
-      db.child("fogMachine").child("setOn").set(False)
+      db.child("fogMachine").child("setOn").setValue(False)
       
     def FogOff():
-      db.child("fogMachine").child("setOff").set(True)
+      db.child("fogMachine").child("setOff").setValue(True)
     
     def undoFogOff():
-      db.child("fogMachine").child("setOff").set(False)
+      db.child("fogMachine").child("setOff").setValue(False)
       
       
     st.button(
