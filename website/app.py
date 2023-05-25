@@ -91,11 +91,10 @@ def main():
 
 
 if __name__ == "__main__":
-    st.sidebar.title("IEEE Paper")
-    menu = st.sidebar.radio("Menu", ["Login", "SignUp"])
-    if menu == "Login":
-        login()
-    elif menu == "SignUp":
-        signup()
-
-#I hope this helps you to get started with Firebase and Streamlit. If you have any questions, please let me know in the comments below.
+    main()
+    #st.sidebar.title("IEEE Paper")
+    #menu = st.sidebar.radio("Menu", ["Login", "SignUp"])
+    #if menu == "Login":
+    #    login()
+    #elif menu == "SignUp":
+    #    signup()

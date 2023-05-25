@@ -22,12 +22,13 @@ IEEE Paper Black Soldier Fly BSF
 #define DHTTYPE   DHT22
 
 #define DHTPIN    19
-#define ldrPin    4
+//#define ldrPin    4
 #define heaterPin 18
 #define fogPin    19
 #define shadePin  2
 //#define bh1750_sda 21
 //#define bh1750_scl 22
+
 
 DHT            dht(DHTPIN, DHTTYPE);
 BH1750         lightMeter(0x23);
@@ -40,6 +41,8 @@ FirebaseJson   humjson;
 WiFiUDP        ntpUDP;
 NTPClient      timeClient(ntpUDP);
 
+const float   luxLowerLimit      = 550;
+const float   luxHigherLimit     = 10000;
 const float   GAMMA              = 0.7;
 const float   RL10               = 50;
 unsigned long sendDataPrevMillis = 0;
@@ -48,7 +51,7 @@ bool          setFog;
 bool          setShade;
 bool          setBulb;
 float         lux;
-float         lux_ldr;
+//float         lux_ldr;
 int           splitT;
 String        formattedDate;
 String        dayStamp;
@@ -163,18 +166,18 @@ void loop()
 
     /*==============================================================================
     ================================================================================
-    ===========================Light================================================
+    ===========================Light Sensor=========================================
     ================================================================================
     ================================================================================*/
 
     // Convert the ldr analog value into lux value:
-    float analogValue = analogRead(ldrPin);
-    float voltage     = (analogValue / 1023.) * 5;
-    float resistance  = 2000 * voltage / (1 - voltage / 5);
-    lux_ldr     = pow(RL10 * 1e3 * pow(10, GAMMA) / resistance, (1 / GAMMA));
-    Serial.println(F("Intensity: "));
-    Serial.print(lux_ldr);
-    Serial.print(F("lux"));
+    //float analogValue = analogRead(ldrPin);
+    //float voltage     = (analogValue / 1023.) * 5;
+    //float resistance  = 2000 * voltage / (1 - voltage / 5);
+    //lux_ldr     = pow(RL10 * 1e3 * pow(10, GAMMA) / resistance, (1 / GAMMA));
+    //Serial.println(F("Intensity: "));
+    //Serial.print(lux_ldr);
+    //Serial.print(F("lux"));
 
     // ==========BH1750=========================
     
@@ -195,6 +198,8 @@ void loop()
     ===========================Heater===============================================
     ================================================================================
     ================================================================================*/
+    if (lux < luxLowerLimit):digitalWrite(heaterPin, HIGH)
+    if (lux > luxHigherLimit): digitalWrite(heaterPin, LOW)
     if (Firebase.RTDB.getBool(&fbdo, "heaterBulb/setOn")) {
         if (fbdo.dataType() == "boolean") {
             setBulb = fbdo.boolData();
