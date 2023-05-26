@@ -2,3 +2,4 @@
 Pyrebase4
 streamlit
 virtualenvz
+firebase_admin
