@@ -105,7 +105,7 @@ from firebase_admin import credentials
 from firebase_admin import db
 
 # Initialize the Firebase app
-cred = credentials.Certificate("https://bsf-bradley-default-rtdb.firebaseio.com/webapp")
+cred = credentials.Certificate("https://bsf-bradley-default-rtdb.firebaseio.com/webapp/private_key.json")
 firebase_admin.initialize_app(cred, {
     'databaseURL': 'https://bsf-bradley-default-rtdb.firebaseio.com/'
 })
