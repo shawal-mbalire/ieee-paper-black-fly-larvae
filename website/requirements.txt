@@ -1,5 +1,2 @@
-#pyrebase==3.0.27
-Pyrebase4
 streamlit
-virtualenvz
 firebase_admin
