@@ -104,20 +104,11 @@ import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import db
 
-firebaseConfig = {
-  "type":           "service_account",
-  "project_id":     "bsf-bradley",
-  "private_key_id": "be10d041e30c2cb6cae1a389cc3ab90711e98c42",
-  "private_key":    "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQDTEThoNj6HIBEd\nEDszfB61wcA5D8h5fnLzWavByaBPntutxk/28AsM1oES+BWx+NIbIhn4GRDjPf0k\n+pAGuSle5JkFFa99uHvq9O7LSepIEEr63qBS2apU7+ujGW63dTVwilwMavqRSwSO\n/tmln42UcQ/QCfkVVzB6r97c+5v3wd16Gvo3rFk5Fg7qaBTzCwECOkEyqFBj9WhP\n/zt+OECmhQhuUrcJG//kCtl4fXXb+8aNyawT1dbCzcPviSuJe22dDRycXdM4oPqr\n9vlRWLd5wcwZm9ay/TfurFR4ukJgXCXuTppl4uh5/tSESyNQQs6aFit0RbFj5+qD\nMDOMLZOrAgMBAAECggEAS0FdklKc8sLtNyadZRsBPB8L8Yx+F0uNotS7F8pTHXBv\ntUL7KfmmhvpIZUINQjqMd14uUjZlvhBRHQk1pyAH7yyknpp/ytynWjvglJ0TKoSc\np1wPX9r6D3TH2Ixt3H2vAyRh84+FLZ7Izk9xvMrpyR6S28Nii0heIbBpTvNrRee0\n0RlWPC7MepuVW/8n92Y+0uIHCa6bMumj9OYPUtSOCpQYWz/9fHZR33wR/pY9oJqu\nkWxkFjHMIKBl/98hst2bNtDZqv3WOMwtgCYkAbeomG8ZnTLd2mwVz2VI4ExuhT+4\npUjFqGCOrzJ0E2TpQ8Wgg6wmpBJwjoZCgDmUFBh1SQKBgQDrRzOj1xDwdz1YhcGk\nD8xMBKVsXfTWwkj8eDsfmfLauadmiErivan9KpjuTAYGakT9rqDSmgiVHJL4Ttpx\nR9HGfl1MAJ8Z9XbACN06C1DpNDM4sIVRQlvpi2egNcaVqnmiQmrv9em2TEbTA7Uj\nf3vP7PhWXp2iCoIRt1Cead7eZQKBgQDlqCNZQMUIh4/bosu2X4MiI9cMSpkxou9n\nxbugelITQK+K9vQGP1SfvhRwplhifxDFsYTWmVgjJ7r1V/2UctxuZeL7uHF2WXSM\neNZ0vngkKarRopmHKvP5isuTaQIgiWyccSmhBl6tYJLA9uKHLPsj9HaUlh8H9yv3\n0UBwGLzAzwKBgBVLwJTX5qSdZmQY10ouU+OdmAuTBZJay5humYtmt+CsZUaWl5Cm\ncjiEHouTPghenhgIMm5dmuFEUNlA6ezO/2HkFjXG6J/E5BbFtqCGXbB+FRTQhYCx\nbPhaseqCc5MgdxoEwQEvVRQ3G0IGV+L6qw5K+L94mPQN13AbE6UDGDUxAoGAaxw+\nUFRbER1YxRFqfYaSfIvGsp7gUDwz+GxKlBA4023p8aA4M+m5qD9Y/Sk4M8gbpHil\nAgnHB65yDheZ13CyynKOqORfVtll+FYrf4uOMR+V4ew6OsaXv50yUXA6Y750f4pv\n5gA4jBhsmb8L7AvYne5Yl/hkRKzNPunDagS/lBUCgYAi6RheKp5Iu8lx5wlpbFNs\nUYva1EOqrcTDKprHXnva4zeEO9SXDjK2o61vdqqJSQR/CrvqKdWt2Vl37o7MXA5g\nbwl70bWznG/ODJgkaPaEgjzSrjgXf2SP+tabuq5lbbJtlEO4y6wResrbH/gMR4OP\n3UR1My6PRDwduhSVxMBHaw==\n-----END PRIVATE KEY-----\n",
-  "client_email":   "firebase-adminsdk-snxpg@bsf-bradley.iam.gserviceaccount.com",
-  "client_id":      "118392316616996417164",
-  "auth_uri":       "https://accounts.google.com/o/oauth2/auth",
-  "token_uri":      "https://oauth2.googleapis.com/token",
-  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-snxpg%40bsf-bradley.iam.gserviceaccount.com",
-  "universe_domain": "googleapis.com",
-  "databaseURL":     "https://bsf-bradley-default-rtdb.firebaseio.com/"
-}
+cred = credentials.Certificate("C:\Users\asus\Downloads\key.json")
+
+firebase_admin.initialize_app(cred, {
+    'databaseURL': 'https://your-firebase-database-url.firebaseio.com/'
+})
     
 # Initialize the Firebase app
 firebase_admin.initialize_app(firebaseConfig)
