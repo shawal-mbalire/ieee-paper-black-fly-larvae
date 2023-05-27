@@ -129,5 +129,5 @@ def main():
         update_boolean_value(False)
         st.success("Boolean value set to False")
 
-if _name_ == "_main_":
+if __name__ == "__main__":
     main()
