@@ -1,4 +1,3 @@
-import urllib3.contrib.appengine
 import pyrebase
 import streamlit as st
 from datetime import datetime
