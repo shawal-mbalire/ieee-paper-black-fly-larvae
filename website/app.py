@@ -101,21 +101,18 @@
 
 import streamlit as st
 import firebase_admin
-from firebase_admin import credentials
+#from firebase_admin import credentials
 from firebase_admin import db
 
-cred = credentials.Certificate("C:\Users\asus\Downloads\key.json")
+#cred = credentials.Certificate("C:\Users\asus\Downloads\key.json")
 
-firebase_admin.initialize_app(cred, {
-    'databaseURL': 'https://your-firebase-database-url.firebaseio.com/'
-})
-    
 # Initialize the Firebase app
-firebase_admin.initialize_app(firebaseConfig)
+firebase_admin.initialize_app()
+
 
 # Function to update the boolean value in Firebase
 def update_boolean_value(value):
-    ref = db.reference('/fogMachine/setOn')
+    ref = db.reference('https://bsf-bradley-default-rtdb.firebaseio.com/fogMachine/setOn')
     ref.set(value)
 
 # Streamlit app
