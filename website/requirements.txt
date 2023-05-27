@@ -3,3 +3,4 @@ firebase_admin
 pyrebase==3.0.27
 Pyrebase4
 requests
+urllib3
