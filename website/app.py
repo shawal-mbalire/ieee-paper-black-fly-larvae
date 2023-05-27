@@ -63,7 +63,7 @@ storage     = firebase.storage()
 #             st.error("Invalid Email or Password")
 
 def update_boolean_value(value):
-    ref = db.reference('fogMachine/setOn')
+    ref = db.child("fogMachine").child('setOn')
     ref.set(value)
     st.write("Fog!!")
 # Streamlit app
