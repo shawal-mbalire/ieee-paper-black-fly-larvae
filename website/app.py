@@ -118,48 +118,48 @@ def main():
 
     if st.button("Set fogOff to True"):
         update_fogOff(True)
-        st.success("Manual fog ON  activated")
+        st.success("Manual fog Off  activated")
     
     # Button to update boolean value to False
     if st.button("Set fog Off to False"):
         update_fogOff(False)
-        st.success("Manual fog ON deactivated")
+        st.success("Manual fog Off deactivated")
 
     if st.button("Set heater On to True"):
-        update_heaterOn(True)
-        st.success("Manual fog ON  activated")
+        update_bulbOn(True)
+        st.success("Manual heater ON  activated")
     
     # Button to update boolean value to False
     if st.button("Set heater On to False"):
-        update_heaterOn(False)
-        st.success("Manual fog ON deactivated")
+        update_bulbOn(False)
+        st.success("Manual heater ON deactivated")
 
     if st.button("Set heater Off to True"):
-        update_heaterOff(True)
-        st.success("Manual fog ON  activated")
+        update_bulbOff(True)
+        st.success("Manual heater OFF  activated")
     
     # Button to update boolean value to False
     if st.button("Set heater Off to False"):
-        update_heaterOff(False)
-        st.success("Manual fog ON deactivated")
+        update_bulbOff(False)
+        st.success("Manual heater OFF deactivated")
 
     if st.button("Set shade On to True"):
         update_shadeOn(True)
-        st.success("Manual fog ON  activated")
+        st.success("Manual shade ON  activated")
     
     # Button to update boolean value to False
     if st.button("Set shade On to False"):
         update_shadeOn(False)
-        st.success("Manual fog ON deactivated")
+        st.success("Manual shade ON deactivated")
 
     if st.button("Set shade Off to True"):
         update_shadeOff(True)
-        st.success("Manual fog ON  activated")
+        st.success("Manual shade OFF  activated")
     
     # Button to update boolean value to False
     if st.button("Set shade Off to False"):
         update_shadeOff(False)
-        st.success("Manual fog ON deactivated")
+        st.success("Manual shade OFF deactivated")
         
 if __name__ == "__main__":
     main()
