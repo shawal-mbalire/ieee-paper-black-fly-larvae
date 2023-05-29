@@ -106,60 +106,63 @@ def update_shadeOff(value):
 def main():
     st.title("Firebase Realtime Database Example")
     
-    # Button to update boolean value to True
-    if st.button("Set fogOn to True"):
-        update_fogOn(True)
-        st.success("Manual fog ON  activated")
+    st.subheader("Fog Machine")
+    col1, col2, col3, col4 = st.columns(4)
+    with col1:
+        if st.button("FOG ON:ON"):
+            update_fogOn(True)
+            st.success("Manual fog ON  activated")
+    with col2:
+        if st.button("FOG ON:OFF"):
+            update_fogOn(False)
+            st.success("Manual fog ON deactivated")
+    with col3:
+        if st.button("FOG OFF:ON"):
+            update_fogOff(True)
+            st.success("Manual fog Off  activated")
+    with col4:
+        if st.button("FOG OFF:OFF"):
+            update_fogOff(False)
+            st.success("Manual fog Off deactivated")
+            
+    st.subheader("Heater Bulb")
+    col1, col2, col3, col4 = st.columns(4)
+    with col1:
+        if st.button("BULB ON:ON"):
+            update_bulbOn(True)
+            st.success("Manual heater ON  activated")
+    with col2:
+        if st.button("BULB ON:OFF"):
+            update_bulbOn(False)
+            st.success("Manual heater ON deactivated")
+    with col3:
+        if st.button("BULB OFF:ON"):
+            update_bulbOff(True)
+            st.success("Manual heater OFF  activated")    
+    with col4:
+        if st.button("BULB OFF:OFF"):
+            update_bulbOff(False)
+            st.success("Manual heater OFF deactivated")
     
-    # Button to update boolean value to False
-    if st.button("Set fog On to False"):
-        update_fogOn(False)
-        st.success("Manual fog ON deactivated")
-
-    if st.button("Set fogOff to True"):
-        update_fogOff(True)
-        st.success("Manual fog Off  activated")
+    st.subheader("Shade Motor")
+    col1, col2, col3, col4 = st.columns(4)
+    with col1:
+        if st.button("SHADE ON:ON"):
+            update_shadeOn(True)
+            st.success("Manual shade ON  activated")
+    with col2:
+        if st.button("SHADE ON:OFF"):
+            update_shadeOn(False)
+            st.success("Manual shade ON deactivated")
+    with col3:
+        if st.button("SHADE OFF:ON"):
+            update_shadeOff(True)
+            st.success("Manual shade OFF  activated")
     
-    # Button to update boolean value to False
-    if st.button("Set fog Off to False"):
-        update_fogOff(False)
-        st.success("Manual fog Off deactivated")
-
-    if st.button("Set heater On to True"):
-        update_bulbOn(True)
-        st.success("Manual heater ON  activated")
-    
-    # Button to update boolean value to False
-    if st.button("Set heater On to False"):
-        update_bulbOn(False)
-        st.success("Manual heater ON deactivated")
-
-    if st.button("Set heater Off to True"):
-        update_bulbOff(True)
-        st.success("Manual heater OFF  activated")
-    
-    # Button to update boolean value to False
-    if st.button("Set heater Off to False"):
-        update_bulbOff(False)
-        st.success("Manual heater OFF deactivated")
-
-    if st.button("Set shade On to True"):
-        update_shadeOn(True)
-        st.success("Manual shade ON  activated")
-    
-    # Button to update boolean value to False
-    if st.button("Set shade On to False"):
-        update_shadeOn(False)
-        st.success("Manual shade ON deactivated")
-
-    if st.button("Set shade Off to True"):
-        update_shadeOff(True)
-        st.success("Manual shade OFF  activated")
-    
-    # Button to update boolean value to False
-    if st.button("Set shade Off to False"):
-        update_shadeOff(False)
-        st.success("Manual shade OFF deactivated")
+    with col4:
+        if st.button("SHADE OFF:OFF"):
+            update_shadeOff(False)
+            st.success("Manual shade OFF deactivated")
         
 if __name__ == "__main__":
     main()
