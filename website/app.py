@@ -61,25 +61,106 @@ storage     = firebase.storage()
 #             main()
 #         except:
 #             st.error("Invalid Email or Password")
-
-def update_boolean_value(value):
+    
+def update_fogOn(value):
     ref = db.child("fogMachine").child('setOn')
     ref.set(value)
     st.write("Fog!!")
+def update_fogOff(value):
+    ref = db.child("fogMachine").child('setOff')
+    ref.set(value)
+    st.write("Fog!!")
+
+def update_bulbOn(value):
+    ref = db.child("heaterBulb").child('setOn')
+    ref.set(value)
+    st.write("Bulb!!")
+def update_bulbOff(value):
+    ref = db.child("heaterBulb").child('setOff')
+    ref.set(value)
+    st.write("Bulb!!")
+
+def update_shadeOn(value):
+    ref = db.child("shadeMotor").child('setOn')
+    ref.set(value)
+    st.write("shade!!")
+def update_shadeOff(value):
+    ref = db.child("shadeMotor").child('setOff')
+    ref.set(value)
+    st.write("shade!!")
+# Streamlit app
+# def main():
+#     st.title("Firebase Realtime Database Example")
+    
+#     # Button to update boolean value to True
+#     if st.button("Set fogOn to True"):
+#         update_boolean_value(True)
+#         st.success("Boolean value set to True")
+    
+#     # Button to update boolean value to False
+#     if st.button("Set fog On to False"):
+#         update_boolean_value(False)
+#         st.success("Boolean value set to False")
+
 # Streamlit app
 def main():
     st.title("Firebase Realtime Database Example")
     
     # Button to update boolean value to True
     if st.button("Set fogOn to True"):
-        update_boolean_value(True)
-        st.success("Boolean value set to True")
+        update_fogOn(True)
+        st.success("Manual fog ON  activated")
     
     # Button to update boolean value to False
     if st.button("Set fog On to False"):
-        update_boolean_value(False)
-        st.success("Boolean value set to False")
+        update_fogOn(False)
+        st.success("Manual fog ON deactivated")
 
+    if st.button("Set fogOff to True"):
+        update_fogOff(True)
+        st.success("Manual fog ON  activated")
+    
+    # Button to update boolean value to False
+    if st.button("Set fog Off to False"):
+        update_fogOff(False)
+        st.success("Manual fog ON deactivated")
+
+    if st.button("Set heater On to True"):
+        update_heaterOn(True)
+        st.success("Manual fog ON  activated")
+    
+    # Button to update boolean value to False
+    if st.button("Set heater On to False"):
+        update_heaterOn(False)
+        st.success("Manual fog ON deactivated")
+
+    if st.button("Set heater Off to True"):
+        update_heaterOff(True)
+        st.success("Manual fog ON  activated")
+    
+    # Button to update boolean value to False
+    if st.button("Set heater Off to False"):
+        update_heaterOff(False)
+        st.success("Manual fog ON deactivated")
+
+    if st.button("Set shade On to True"):
+        update_shadeOn(True)
+        st.success("Manual fog ON  activated")
+    
+    # Button to update boolean value to False
+    if st.button("Set shade On to False"):
+        update_shadeOn(False)
+        st.success("Manual fog ON deactivated")
+
+    if st.button("Set shade Off to True"):
+        update_shadeOff(True)
+        st.success("Manual fog ON  activated")
+    
+    # Button to update boolean value to False
+    if st.button("Set shade Off to False"):
+        update_shadeOff(False)
+        st.success("Manual fog ON deactivated")
+        
 if __name__ == "__main__":
     main()
 # # Main Page
@@ -94,9 +175,6 @@ if __name__ == "__main__":
 # #     onFog        = db.child("fogMachine").child("isOn"       ).get()
 # #     onShade      = db.child("shadeMotor").child("isOn"       ).get()
 # #     onBulb       = db.child("heaterBulb").child("isOn"       ).get()
-# #     setFog       = db.child("fogMachine").child("setOn"      ).get()
-# #     setShade     = db.child("shadeMotor").child("setOn"      ).get()
-# #     setBulb      = db.child("heaterBulb").child("setOn"      ).get()
 
 #     # Display data
 #     st.write("Lux: ",             lux.val())
@@ -118,36 +196,7 @@ if __name__ == "__main__":
     #    login()
     #elif menu == "SignUp":
     #    signup()
-
-# import streamlit as st
-# import firebase_admin
-# #from firebase_admin import credentials
-# from firebase_admin import db
-
-# #cred = credentials.Certificate("C:\Users\asus\Downloads\key.json")
-
-# # Initialize the Firebase app
-# firebase_admin.initialize_app()
-
-
-# # Function to update the boolean value in Firebase
-# def update_boolean_value(value):
-#     ref = db.reference('https://bsf-bradley-default-rtdb.firebaseio.com/fogMachine/setOn')
-#     ref.set(value)
-
-# # Streamlit app
-# def main():
-#     st.title("Firebase Realtime Database Example")
     
-#     # Button to update boolean value to True
-#     if st.button("Set fogOn to True"):
-#         update_boolean_value(True)
-#         st.success("Boolean value set to True")
-    
-#     # Button to update boolean value to False
-#     if st.button("Set fog On to False"):
-#         update_boolean_value(False)
-#         st.success("Boolean value set to False")
+   
 
-# if __name__ == "__main__":
-#     main()
+
