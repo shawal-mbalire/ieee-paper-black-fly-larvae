@@ -65,29 +65,29 @@ storage     = firebase.storage()
 def update_fogOn(value):
     ref = db.child("fogMachine").child('setOn')
     ref.set(value)
-    st.write("Fog!!")
+    #st.write("Fog!!")
 def update_fogOff(value):
     ref = db.child("fogMachine").child('setOff')
     ref.set(value)
-    st.write("Fog!!")
+    #st.write("Fog!!")
 
 def update_bulbOn(value):
     ref = db.child("heaterBulb").child('setOn')
     ref.set(value)
-    st.write("Bulb!!")
+    #st.write("Bulb!!")
 def update_bulbOff(value):
     ref = db.child("heaterBulb").child('setOff')
     ref.set(value)
-    st.write("Bulb!!")
+    #st.write("Bulb!!")
 
 def update_shadeOn(value):
     ref = db.child("shadeMotor").child('setOn')
     ref.set(value)
-    st.write("shade!!")
+    #st.write("shade!!")
 def update_shadeOff(value):
     ref = db.child("shadeMotor").child('setOff')
     ref.set(value)
-    st.write("shade!!")
+    #st.write("shade!!")
 # Streamlit app
 # def main():
 #     st.title("Firebase Realtime Database Example")
@@ -109,58 +109,58 @@ def main():
     st.subheader("Fog Machine")
     col1, col2, col3, col4 = st.columns(4)
     with col1:
-        if st.button("FOG ON:ON"):
+        if st.button("FOG ON (ON)"):
             update_fogOn(True)
             st.success("Manual fog ON  activated")
     with col2:
-        if st.button("FOG ON:OFF"):
+        if st.button("FOG ON (OFF)"):
             update_fogOn(False)
             st.success("Manual fog ON deactivated")
     with col3:
-        if st.button("FOG OFF:ON"):
+        if st.button("FOG OFF (ON)"):
             update_fogOff(True)
             st.success("Manual fog Off  activated")
     with col4:
-        if st.button("FOG OFF:OFF"):
+        if st.button("FOG OFF (OFF)"):
             update_fogOff(False)
             st.success("Manual fog Off deactivated")
             
     st.subheader("Heater Bulb")
     col1, col2, col3, col4 = st.columns(4)
     with col1:
-        if st.button("BULB ON:ON"):
+        if st.button("BULB ON (ON)"):
             update_bulbOn(True)
             st.success("Manual heater ON  activated")
     with col2:
-        if st.button("BULB ON:OFF"):
+        if st.button("BULB ON (OFF)"):
             update_bulbOn(False)
             st.success("Manual heater ON deactivated")
     with col3:
-        if st.button("BULB OFF:ON"):
+        if st.button("BULB OFF (ON)"):
             update_bulbOff(True)
             st.success("Manual heater OFF  activated")    
     with col4:
-        if st.button("BULB OFF:OFF"):
+        if st.button("BULB OFF (OFF)"):
             update_bulbOff(False)
             st.success("Manual heater OFF deactivated")
     
     st.subheader("Shade Motor")
     col1, col2, col3, col4 = st.columns(4)
     with col1:
-        if st.button("SHADE ON:ON"):
+        if st.button("SHADE ON (ON)"):
             update_shadeOn(True)
             st.success("Manual shade ON  activated")
     with col2:
-        if st.button("SHADE ON:OFF"):
+        if st.button("SHADE ON (OFF)"):
             update_shadeOn(False)
             st.success("Manual shade ON deactivated")
     with col3:
-        if st.button("SHADE OFF:ON"):
+        if st.button("SHADE OFF (ON)"):
             update_shadeOff(True)
             st.success("Manual shade OFF  activated")
     
     with col4:
-        if st.button("SHADE OFF:OFF"):
+        if st.button("SHADE OFF (OFF)"):
             update_shadeOff(False)
             st.success("Manual shade OFF deactivated")
         
