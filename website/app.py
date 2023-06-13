@@ -74,7 +74,7 @@ def update_bulbOn():
 def update_bulbOff():
 #     ref = db.child("heaterBulb").child('setOff')
 #     ref.set(value)
- ref = db.child("heaterBulb").child('setOff')
+    ref = db.child("heaterBulb").child('setOff')
     if ref == True:
       ref.set(False)
       st.success("Manual OFF deactivated")
