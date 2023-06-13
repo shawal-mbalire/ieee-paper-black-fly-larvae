@@ -63,7 +63,7 @@ def login():
             st.error("Invalid Email or Password")
    
 def update_bulbOn():
-  current_value = db.child("heaterBulb").child("setOn")get().val()  # Fetch current value from the database
+  current_value = db.child("heaterBulb").child("setOn").get().val()  # Fetch current value from the database
   new_value = not current_value  # Toggle the value
   db.child("heaterBulb").child("setOn").set(new_value)
   if new_value == True:
@@ -79,7 +79,7 @@ def update_bulbOn():
 #       st.success("Manual ON activated")
     #st.write("Bulb!!")
 def update_bulbOff():
-  current_value = db.child("heaterBulb").child("setOff")get().val()  # Fetch current value from the database
+  current_value = db.child("heaterBulb").child("setOff").get().val()  # Fetch current value from the database
   new_value = not current_value  # Toggle the value
   db.child("heaterBulb").child("setOff").set(new_value)
   if new_value == True:
