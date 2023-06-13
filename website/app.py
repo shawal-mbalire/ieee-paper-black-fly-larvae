@@ -106,12 +106,13 @@ def main():
             st.success("Manual heater OFF  deactivated")
         
 if __name__ == "__main__":
+    main()
     st.sidebar.title("IEEE Paper")
-    menu = st.sidebar.radio("Menu", ["Login", "SignUp"])
-    if menu == "Login":
-       login()
-    elif menu == "SignUp":
-       signup()
+#     menu = st.sidebar.radio("Menu", ["Login", "SignUp"])
+#     if menu == "Login":
+#        login()
+#     elif menu == "SignUp":
+#        signup()
     
    
 
