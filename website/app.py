@@ -62,13 +62,25 @@ def login():
         except:
             st.error("Invalid Email or Password")
    
-def update_bulbOn(value):
+def update_bulbOn():
     ref = db.child("heaterBulb").child('setOn')
-    ref.set(value)
+    if ref == True:
+      ref.set(False)
+      st.success("Manual ON deactivated")
+    elif ref == False:
+      ref.set(True)
+      st.success("Manual ON activated")
     #st.write("Bulb!!")
-def update_bulbOff(value):
-    ref = db.child("heaterBulb").child('setOff')
-    ref.set(value)
+def update_bulbOff():
+#     ref = db.child("heaterBulb").child('setOff')
+#     ref.set(value)
+ ref = db.child("heaterBulb").child('setOff')
+    if ref == True:
+      ref.set(False)
+      st.success("Manual OFF deactivated")
+    elif ref == False:
+      ref.set(True)
+      st.success("Manual OFF activated")
 
 # Streamlit app
 def main():
@@ -89,21 +101,23 @@ def main():
     col1, col2 = st.columns(2)
     with col1:
         if st.button("BULB ON"):
-          if bulbOn == False:
-            update_bulbOn(True)
-            st.success("Manual heater ON  activated")
-          elif bulbOn == True:
-            update_bulbOn(False)
-            st.success("Manual heater ON  deactivated")
+          update_bulbOn()
+#           if bulbOn == False:
+#             update_bulbOn(True)
+#             st.success("Manual heater ON  activated")
+#           elif bulbOn == True:
+#             update_bulbOn(False)
+#             st.success("Manual heater ON  deactivated")
             
     with col2:
         if st.button("BULB OFF"):
-          if bulbOff == False:
-            update_bulbOff(True)
-            st.success("Manual heater OFF  activated")
-          elif bulbOff == True:
-            update_bulbOff(False)
-            st.success("Manual heater OFF  deactivated")
+          update_bulbOff()
+#           if bulbOff == False:
+#             update_bulbOff(True)
+#             st.success("Manual heater OFF  activated")
+#           elif bulbOff == True:
+#             update_bulbOff(False)
+#             st.success("Manual heater OFF  deactivated")
         
 if __name__ == "__main__":
     main()
