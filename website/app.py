@@ -63,24 +63,38 @@ def login():
             st.error("Invalid Email or Password")
    
 def update_bulbOn():
-    ref = db.child("heaterBulb").child('setOn')
-    if ref == True:
-      ref.set(False)
-      st.success("Manual ON deactivated")
-    elif ref == False:
-      ref.set(True)
-      st.success("Manual ON activated")
+  current_value = db.child("heaterBulb").child("setOn")get().val()  # Fetch current value from the database
+  new_value = not current_value  # Toggle the value
+  db.child("heaterBulb").child("setOn").set(new_value)
+  if new_value == True:
+    st.success("Manual ON activated")
+  elif new_value == False:
+    st.success("Manual ON deavtivated")
+#     ref = db.child("heaterBulb").child('setOn')
+#     if ref == True:
+#       ref.set(False)
+#       st.success("Manual ON deactivated")
+#     elif ref == False:
+#       ref.set(True)
+#       st.success("Manual ON activated")
     #st.write("Bulb!!")
 def update_bulbOff():
+  current_value = db.child("heaterBulb").child("setOff")get().val()  # Fetch current value from the database
+  new_value = not current_value  # Toggle the value
+  db.child("heaterBulb").child("setOff").set(new_value)
+  if new_value == True:
+    st.success("Manual OFF activated")
+  elif new_value == False:
+    st.success("Manual OFF deavtivated")
 #     ref = db.child("heaterBulb").child('setOff')
 #     ref.set(value)
-    ref = db.child("heaterBulb").child('setOff')
-    if ref == True:
-      ref.set(False)
-      st.success("Manual OFF deactivated")
-    elif ref == False:
-      ref.set(True)
-      st.success("Manual OFF activated")
+#     ref = db.child("heaterBulb").child('setOff')
+#     if ref == True:
+#       ref.set(False)
+#       st.success("Manual OFF deactivated")
+#     elif ref == False:
+#       ref.set(True)
+#       st.success("Manual OFF activated")
 
 # Streamlit app
 def main():
