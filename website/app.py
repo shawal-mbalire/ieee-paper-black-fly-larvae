@@ -107,7 +107,7 @@ def main():
         
 if __name__ == "__main__":
     main()
-    st.sidebar.title("IEEE Paper")
+#     st.sidebar.title("IEEE Paper")
 #     menu = st.sidebar.radio("Menu", ["Login", "SignUp"])
 #     if menu == "Login":
 #        login()
