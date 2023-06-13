@@ -77,6 +77,8 @@ def main():
     lux          = db.child("BH1750"    ).child("lux"        ).get()
     temperature  = db.child("DHT"       ).child("temperature").get()
     humidity     = db.child("DHT"       ).child("humidity"   ).get()
+    bulbOn       = db.child("heaterBulb").child("setOn").get()
+    bulbOff      = db.child("heaterBulb").child("setOff").get()
     
     # Display data
     st.write("Lux: ",             lux.val())
@@ -84,23 +86,24 @@ def main():
     st.write("Humidity: ",        humidity.val())
     
     st.subheader("Heater Bulb")
-    col1, col2, col3, col4 = st.columns(4)
+    col1, col2 = st.columns(2)
     with col1:
-        if st.button("BULB ON (ON)"):
+        if st.button("BULB ON"):
+          if bulbOn == False:
             update_bulbOn(True)
             st.success("Manual heater ON  activated")
-    with col2:
-        if st.button("BULB ON (OFF)"):
+          elif bulbOn == True:
             update_bulbOn(False)
-            st.success("Manual heater ON deactivated")
-    with col3:
-        if st.button("BULB OFF (ON)"):
+            st.success("Manual heater ON  deactivated")
+            
+    with col2:
+        if st.button("BULB OFF"):
+          if bulbOff == False:
             update_bulbOff(True)
-            st.success("Manual heater OFF  activated")    
-    with col4:
-        if st.button("BULB OFF (OFF)"):
+            st.success("Manual heater OFF  activated")
+          elif bulbOff == True:
             update_bulbOff(False)
-            st.success("Manual heater OFF deactivated")
+            st.success("Manual heater OFF  deactivated")
         
 if __name__ == "__main__":
     st.sidebar.title("IEEE Paper")
