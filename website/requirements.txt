@@ -1,7 +1,11 @@
 streamlit
 firebase_admin
+<<<<<<< Updated upstream
 pyrebase==3.0.27
 Pyrebase4
 requests
 urllib3==1.26.15
 requests-toolbelt==0.10.1
+=======
+pyrebase4
+>>>>>>> Stashed changes
